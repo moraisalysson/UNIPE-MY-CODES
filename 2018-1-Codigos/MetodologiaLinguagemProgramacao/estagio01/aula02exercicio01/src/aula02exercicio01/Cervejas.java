@@ -11,8 +11,10 @@ public class Cervejas {
 		
 		retiraGarrafas(qtd_cervejas);
 		
-		System.out.println("Deseja adicionar quantas garrafas de cerveja ao freezer?");
+		System.out.print("Deseja adicionar quantas garrafas de cerveja ao freezer? ");
 		qtd_cervejas = input.nextInt();
+		
+		System.out.printf("%n");
 		
 		retiraGarrafas(qtd_cervejas);
 	}
@@ -25,14 +27,14 @@ public class Cervejas {
 				System.out.println(cervejas + " garrafas de cerveja no freezer.");
 			}
 			
-			System.out.println("Pego uma garrafa, paÁo pra frente.");
+			System.out.println("Pego uma garrafa, pa√ßo pra frente.");
 			
 			--cervejas;
 			
 			if(cervejas == 1) {
 				System.out.printf("Agora temos " + cervejas + " garrafa de cerveja no freezer.%n%n");
 			} else {
-				System.out.printf("Agora s„o " + cervejas + " garrafas de cerveja no freezer.%n%n");
+				System.out.printf("Agora s√£o " + cervejas + " garrafas de cerveja no freezer.%n%n");
 			}
 		}
 	}
