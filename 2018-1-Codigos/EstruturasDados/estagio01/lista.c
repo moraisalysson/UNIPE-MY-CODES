@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <string.h>
 #define MAX 10
 
 typedef struct elementos {
@@ -6,17 +8,36 @@ typedef struct elementos {
 
 typedef struct lista {
 	t_elemento vetor[MAX];
-	int n; //índice do último elemento
+	int n; //Ã­ndice do Ãºltimo elemento
 } t_lista;
+
+t_lista criar();
+int isVazia(t_lista * lista);
+int isCheia(t_lista * lista);
+int getTamanho(t_lista * lista);
+t_elemento * getElemento(t_lista * lista, int pos);
+int getPosicao(t_lista * lista, t_elemento dado);
+int compara(t_elemento dado1, t_elemento dado2);
+int inserir(t_lista * lista, int pos, t_elemento dado);
+int deslocaDireita(t_lista * lista, int pos);
+int remover(t_lista * lista, int pos);
+int deslocaEsquerda(t_lista * lista, int pos);
 
 //--------------------------------------------------- MAIN:
 int main() {
+	t_lista lista01;
+	t_elemento elemento01;
 	
+	strcpy(elemento01.nome, "maria");
+	
+	lista01 = criar();
+	
+	inserir(&lista01, 0, elemento01);
 	
 	return 0;
 }
 
-//--------------------------------------------------- FUNÇÕES:
+//--------------------------------------------------- FUNÃ‡Ã•ES:
 t_lista criar() {
 	t_lista lista;
 	
@@ -25,7 +46,7 @@ t_lista criar() {
 	return lista;
 }
 
-t_lista isVazia(t_lista * lista) {
+int isVazia(t_lista * lista) {
 	return (lista->n == -1);
 }
 
@@ -34,10 +55,10 @@ int isCheia(t_lista * lista) {
 }
 
 int getTamanho(t_lista * lista) {
-	return lista->n + 1; //índice + 1
+	return lista->n + 1; //Ã­ndice + 1
 }
 
-t_elemento * getElemento(t_elemento * lista, int pos) {
+t_elemento * getElemento(t_lista * lista, int pos) {
 	if((pos > lista->n) || (pos < 0))
 		return 0;
 	
@@ -102,5 +123,3 @@ int deslocaEsquerda(t_lista * lista, int pos) {
 		
 	return 1;
 }
-
-
