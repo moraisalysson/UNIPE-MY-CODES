@@ -14,18 +14,9 @@ public class Questao07 {
 		
 		for(int index_aluno = 0; index_aluno < 6; ++index_aluno) {
 			for(int index_nota = 0; index_nota < 2; ++index_nota) {
-				
-				System.out.printf("Informe a %dª nota do %dº aluno: ", index_nota + 1, index_aluno + 1);
-				
-				if(verificaNota(notas, index_aluno, index_nota)) { 
-					
-					notas[index_aluno][index_nota] = input.nextFloat();
-				} 
-				else {
-					System.out.println("-> Informe uma nota válida <-");
-				}
+				recebeNotas(notas, index_aluno, index_nota, input);
 			}
-			
+		
 			calculaMedias(medias, notas, index_aluno);
 					
 			imprimeSituacao(medias, index_aluno);
@@ -44,17 +35,33 @@ public class Questao07 {
 		
 		media_classe = calculaMediaClasse(medias, media_classe);
 		
-		exibeRealatorio(quantidade_aprovados, quantidade_recuperacao, quantidade_reprovados, media_classe);		
+		exibeRealatorio(quantidade_aprovados, quantidade_recuperacao, quantidade_reprovados, media_classe);	
 		
 		input.close();
 	}
 	
-	public static boolean verificaNota(float notas[][], int index_aluno, int index_nota) {
-		if(notas[index_aluno][index_nota] < 0.0 && notas[index_aluno][index_nota] > 10.0) {
-			return false;
+	public static boolean verificaFaixaNota(float notas[][], int index_aluno, int index_nota) {
+		if(notas[index_aluno][index_nota] >= 0.0 && notas[index_aluno][index_nota] <= 10.0) {
+			return true;
 		}
 		
-		return true;
+		return false;
+	}
+	
+	public static void recebeNotas(float notas[][], int index_aluno, int index_nota, Scanner input) {
+		
+		while(true) {
+			System.out.printf("Informe a %dª nota do %dº aluno: ", index_nota + 1, index_aluno + 1);
+		
+			notas[index_aluno][index_nota] = input.nextFloat();
+			
+			if(verificaFaixaNota(notas, index_aluno, index_nota)) {
+				break;
+			} else {
+				System.out.println("-> Informe uma nota válida <-");
+			}
+		}
+		
 	}
 	
 	public static void calculaMedias(float medias[], float notas[][], int index_aluno) {	
