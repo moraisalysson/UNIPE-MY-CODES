@@ -115,7 +115,8 @@ void inserirVariosElementosLista(t_lista * lista, t_elemento elemento, int quant
 int main() {
 	t_lista lista01;
 	t_elemento m_elemento;
-	int quant_elementos = 0;	
+	int quant_elementos = 0;
+	int indice_elemento = 0;
 	
 	lista01 = criar();
 	
@@ -128,7 +129,16 @@ int main() {
 	
 	procuraElementoLista(&lista01, m_elemento);
 	
-	remover(t_lista *lista, int pos) {
+	printf("\nRemocao de elementos\n");
+	printf("Informe o nome a ser removido: ");
+	
+	scanf("%s", m_elemento.nome);
+	
+	indice_elemento = getPosicao(&lista01, m_elemento);
+	
+	remover(&lista01, indice_elemento);
+	
+	imprimirElementosLista(&lista01);
 	
 	return 0;
 }
