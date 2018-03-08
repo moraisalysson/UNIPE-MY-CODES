@@ -11,11 +11,11 @@ typedef struct contatos {
 
 typedef struct agenda {
     t_contato vetor_contatos[MAX];
-    int indice_ultimo_contato; //índice do último elemento da agenda
+    int indice_ultimo_contato; //Ã­ndice do Ãºltimo elemento da agenda
 } t_agenda;
 
 
-//--------------------------------------------------- FUNÇÕES:
+//--------------------------------------------------- FUNÃ‡Ã•ES:
 
 t_agenda criarAgenda() {
     t_agenda agenda;
@@ -24,6 +24,7 @@ t_agenda criarAgenda() {
 
     return agenda;
 }
+
 
 int getTamanho(t_agenda * agenda) {
   return agenda->indice_ultimo_contato + 1;
@@ -56,7 +57,7 @@ int getPosicaoContato(t_agenda * agenda, t_contato contato) {
         if(compara(agenda->vetor_contatos[i], contato) == 0)
             return i;
 
-    return -1; //não achou o contato
+    return -1; //nÃ£o achou o contato
 }
 
 int deslocaDireita(t_agenda * agenda, int indice) {
@@ -68,14 +69,14 @@ int deslocaDireita(t_agenda * agenda, int indice) {
     return 1;
 }
 
-int inserirContatos(t_agenda * agenda, int indice_da_insercao, t_contato contato) {
+int inserirContatos(t_agenda * agenda, int indice_da_insercao, t_contato * contato) {
     if( isCheia(agenda) || indice_da_insercao > (agenda->indice_ultimo_contato + 1) || indice_da_insercao < 0 ) {
         return 0;
     }
 
     deslocaDireita(agenda, indice_da_insercao);
 
-    agenda->vetor_contatos[indice_da_insercao] = contato;
+    agenda->vetor_contatos[indice_da_insercao] = *contato;
 
     (agenda->indice_ultimo_contato)++;
 
@@ -129,62 +130,104 @@ int removerContato(t_agenda * agenda, int indice_contato_remover) {
     return 1;
 }
 
+void exibirContatosAgenda(t_agenda * agenda) {
+	int i = 0;
+	
+	printf("\n----- CONTATOS -----\n");
+	
+    for(i = 0; i < getTamanho(agenda); i++) {
+        printf("Nome: %s\n", getContato(agenda, i)->nome);
+        printf("Telefone 1: %s\n", getContato(agenda, i)->numero1);
+        printf("Telefone 2: %s\n", getContato(agenda, i)->numero2);
+        puts("");
+    }
+}
+
+void escolheOpcaoMenu(t_agenda * agenda, t_contato * contato, int opcao) {
+
+	switch (opcao) {
+		case 1:
+			solicitaDadosNovoContato(contato);
+
+			inserirContatos(agenda, (agenda->indice_ultimo_contato + 1), contato); ///<-------- CORRIGIR o incide
+			
+		break;
+			
+		case 2:
+			printf("\n----- PROCURAR CONTATO -----\n");
+		    printf("\nInforme o nome do contato que deseja procurar: ");
+		    scanf("%s", contato->nome);
+			getPosicaoContato(agenda, *contato) != -1 ? printf("O contato esta na Agenda.\n") : printf("Contato nao encontrado.\n");
+		
+		break;
+			
+		case 3:
+			exibirContatosAgenda(agenda);
+		
+		break;
+			
+		case 4:
+		    printf("\n----- REMOVER CONTATO -----\n");
+		    printf("Nome do contato que deseja excluir: ");
+		    scanf("%s", contato->nome);
+		    int posicao_contato = getPosicaoContato(agenda, *contato);
+		    removerContato(agenda, posicao_contato);
+		
+		break;
+			
+		case 5:
+			//atualizarContato() {
+		    printf("\n----- ATUALIZAR CONTATO -----\n");
+		    printf("\nInforme o nome do contato: ");
+		    //solicitaDadosNovoContato(&m_contato);
+		    //inserirContatos(&m_agenda01, i, m_contato);
+		
+		break;
+
+	}
+}
+
+void exibirMenu(t_agenda * agenda, t_contato * contato) {
+	int opcao_escolhida = 0;
+	
+	while(1) {	
+		printf("---- MENU ----\n");
+	    printf("1 - Inserir novo contato\n");
+	    printf("2 - Procurar contato\n");
+	    printf("3 - Exibir lista de contatos\n");
+	    printf("4 - Remover contato\n");
+	    printf("5 - Atualizar contato\n");
+	    printf("6 - Sair\n");
+	    printf("\n>> Indique sua opcao: ");
+    
+		scanf("%d", &opcao_escolhida);
+	
+		if(opcao_escolhida == 6) {
+			printf("\n-- Agenda fechada pelo usuario --\n\n");
+			break;
+		}
+		else if(opcao_escolhida < 1 || opcao_escolhida > 6) {
+			printf("\n>> !! Informe uma opcao valida !! <<\n\n");
+		} 
+		else {
+    		escolheOpcaoMenu(agenda, contato, opcao_escolhida);
+    		puts("");	
+    	}
+		
+		system("pause");
+		system("cls");
+	}	
+}
+
+
 //--------------------------------------------------- MAIN:
 int main() {
     t_agenda m_agenda01; //*m de main()
     t_contato m_contato;
-    int quant_contatos = 0;
-    int i = 0;
 
     m_agenda01 = criarAgenda();
-
-    /*
-  exibirMenu() {
-    1 - Inserir novo contato ok
-    2 - Procurar contato ok
-    3 - Exibir lista de contatos ok
-    4 - Remover contato ok
-    5 - Atualizar contato
-    6 - Sair
-  }
-*/
-    printf("Informe quantos contatos deseja adicionar: ");
-    scanf("%d", &quant_contatos);
-
-    for(i = 0; i < quant_contatos; i++) {
-        solicitaDadosNovoContato(&m_contato);
-
-        inserirContatos(&m_agenda01, i, m_contato);
-    }
-
-    //exibirContatosLista(){
-    for(i = 0; i < getTamanho(&m_agenda01); i++) {
-        printf("\n----- CONTATOS -----\n");
-        printf("Nome: %s\n", getContato(&m_agenda01, i)->nome);
-        printf("Telefone 1: %s\n", getContato(&m_agenda01, i)->numero1);
-        printf("Telefone 2: %s\n", getContato(&m_agenda01, i)->numero2);
-    }
-
-    //removerContato() {
-    printf("\n----- REMOVER CONTATO -----\n");
-    printf("Nome do contato que deseja excluir: ");
-    scanf("%s", m_contato.nome);
-    int posicao_contato = getPosicaoContato(&m_agenda01, m_contato);
-    removerContato(&m_agenda01, posicao_contato);
-
- //exibirContatosLista(){ ----->>> excluir pois está repetido
-    for(i = 0; i < getTamanho(&m_agenda01); i++) {
-        printf("----- CONTATOS -----\n");
-        printf("Nome: %s\n", getContato(&m_agenda01, i)->nome);
-        printf("Telefone 1: %s\n", getContato(&m_agenda01, i)->numero1);
-        printf("Telefone 2: %s\n", getContato(&m_agenda01, i)->numero2);
-    }
-
-    //atualizarContato() {
-    printf("\n----- ATUALIZAR CONTATO -----\n");
-    printf("\nInforme o nome do contato: ");
-    //solicitaDadosNovoContato(&m_contato);
-    //inserirContatos(&m_agenda01, i, m_contato);
-
+    
+	exibirMenu(&m_agenda01, &m_contato);
+    
     return 0;
 }
