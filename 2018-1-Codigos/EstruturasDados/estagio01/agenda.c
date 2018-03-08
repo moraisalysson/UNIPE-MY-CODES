@@ -157,13 +157,19 @@ void escolheOpcaoMenu(t_agenda * agenda, t_contato * contato, int opcao) {
 			printf("\n----- PROCURAR CONTATO -----\n");
 		    printf("\nInforme o nome do contato que deseja procurar: ");
 		    scanf("%s", contato->nome);
-			getPosicaoContato(agenda, *contato) != -1 ? printf("O contato esta na Agenda.\n") : printf("Contato nao encontrado.\n");
+			getPosicaoContato(agenda, *contato) != -1 ? printf("O contato esta na Agenda: \n") : printf("Contato nao encontrado.\n");
+			printf("Nome: %s\n", getContato(agenda, getPosicaoContato(agenda, *contato))->nome);
+        	printf("Telefone 1: %s\n", getContato(agenda, getPosicaoContato(agenda, *contato))->numero1);
+        	printf("Telefone 2: %s\n", getContato(agenda, getPosicaoContato(agenda, *contato))->numero2);
 		
 		break;
 			
 		case 3:
 			exibirContatosAgenda(agenda);
-		
+			
+			if(isVazia(agenda))
+				printf(">> Lista vazia.\n");
+			
 		break;
 			
 		case 4:
@@ -171,7 +177,7 @@ void escolheOpcaoMenu(t_agenda * agenda, t_contato * contato, int opcao) {
 		    printf("Nome do contato que deseja excluir: ");
 		    scanf("%s", contato->nome);
 		    int posicao_contato = getPosicaoContato(agenda, *contato);
-		    removerContato(agenda, posicao_contato);
+		    removerContato(agenda, posicao_contato) == 1 ? printf("\n>> Contato removido com sucesso.\n\n") : printf("\n>> Contato informado nao existe na agenda.\n\n");
 		
 		break;
 			
