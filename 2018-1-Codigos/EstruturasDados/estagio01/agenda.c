@@ -138,15 +138,14 @@ int verificaPosicaoContatoParaInserir(t_agenda * agenda, t_contato * contato) {
 		
 	else {
 		while(1) {
-			if(toupper(contato->nome[0]) > toupper(agenda->vetor_contatos[indice].nome[0])) {
-				return indice - 1;
+			if( strcmp(contato->nome, agenda->vetor_contatos[indice].nome) < 0) {
+				return indice;
 				break;
 			}
 			
 			indice++;
 		}	
 	}
-	
 	
 }
 
