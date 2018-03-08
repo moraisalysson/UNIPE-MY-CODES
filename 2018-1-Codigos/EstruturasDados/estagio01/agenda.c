@@ -85,7 +85,7 @@ int inserirContatos(t_agenda * agenda, int indice_da_insercao, t_contato * conta
 
 void solicitaDadosNovoContato(t_contato * contato) {
     char resposta_inserir_numero2 = 'n';
-
+    
     printf("--- Novo contato ---");
 
     printf("\nNome: ");
@@ -103,7 +103,7 @@ void solicitaDadosNovoContato(t_contato * contato) {
         printf("Numero 02: ");
         scanf("%s", contato->numero2);
     } else {
-        strcpy(contato->numero2, "---");
+        strcpy(contato->numero2, " ");
     }
 
     puts("");
@@ -130,6 +130,26 @@ int removerContato(t_agenda * agenda, int indice_contato_remover) {
     return 1;
 }
 
+int verificaPosicaoContatoParaInserir(t_agenda * agenda, t_contato * contato) {
+	int indice = 0;
+	
+	if(isVazia(agenda))
+		return 0;
+		
+	else {
+		while(1) {
+			if(toupper(contato->nome[0]) > toupper(agenda->vetor_contatos[indice].nome[0])) {
+				return indice - 1;
+				break;
+			}
+			
+			indice++;
+		}	
+	}
+	
+	
+}
+
 void exibirContatosAgenda(t_agenda * agenda) {
 	int i = 0;
 	
@@ -148,8 +168,8 @@ void escolheOpcaoMenu(t_agenda * agenda, t_contato * contato, int opcao) {
 	switch (opcao) {
 		case 1:
 			solicitaDadosNovoContato(contato);
-
-			inserirContatos(agenda, (agenda->indice_ultimo_contato + 1), contato); ///<-------- CORRIGIR o incide
+	
+			inserirContatos(agenda, verificaPosicaoContatoParaInserir(agenda, contato), contato); ///<-------- CORRIGIR o incide
 			
 		break;
 			
