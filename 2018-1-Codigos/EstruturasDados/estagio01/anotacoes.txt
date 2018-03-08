@@ -1,0 +1,20 @@
+aula 08/03/2018
+
+p guarda 0x40
+&t_nó p1 = 0x40
+&t_nó q2 = 0x50
+
+
+a) atribui a P o endereco 0x50, assim, P perde a ligacao com o 0x40. P guarda o endereço de 0x40, então, P->prox == t_nó(p1)->prox
+
+p guarda 0x50
+&t_nó p1 = 0x40
+&t_nó q2 = 0x50
+
+b) P vai ser conectado a q1 (aponta para q1)
+
+c) P perde a conexão com p1 e consequentemente, com o resto da lista
+
+d) P perde a ligação com t_nó de que guarda p1 e passa a apontar para t_nó de p2
+
+e) q1 recebe o valor de q2
