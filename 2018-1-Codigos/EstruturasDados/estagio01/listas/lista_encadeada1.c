@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 typedef struct elementos {
 	char nome[50];
 } t_elemento;
@@ -18,23 +21,40 @@ t_no * criaNo() {
 	return no;		
 }
 
+t_no * getNo(t_lista lista, int pos) {
+    // Retorna 0 se posicao invalida. Do contrario, retorna o elemento
+    int n = 0;
+
+    if (pos<0)
+        return 0; // erro: posicao invalida
+
+    while (lista != NULL) {
+        if (n==pos)
+            return lista;
+        lista = lista->prox;
+        n++;
+    }
+    return 0; // erro: posicao invalida
+}
+
+
 int main() {
-	
 	t_lista m_No; //ponteiro para um t_no
 	t_lista no_aux; //ponteiro para um t_no
 	t_lista ultimo_no; //ponteiro para um t_no
+	int i = 1;
 	
-	m_No = criaNo(); //aloca e retorna o endereço alocado 1º nó
-	ultimo_no = m_No; //como só existe um único nó, então ele também é o último
+	m_No = criaNo(); //aloca e retorna o endereÃ§o alocado 1Âº nÃ³
+	ultimo_no = m_No; //como sÃ³ existe um Ãºnico nÃ³, entÃ£o ele tambÃ©m Ã© o Ãºltimo
 	
-	while(1) {
-		no_aux = criaNo(); //aloca uma memória para o próximo t_no, que é, temporariamente, chamado de auxiliar
-		ultimo_no->prox = no_aux; //o último nó sempre recebe o endereço alocado do nó criado
+	while(i <= 5) {
+		no_aux = criaNo(); //aloca uma memÃ³ria para o prÃ³ximo t_no, que Ã©, temporariamente, chamado de auxiliar
+		ultimo_no->prox = no_aux; //o Ãºltimo nÃ³ sempre recebe o endereÃ§o alocado do nÃ³ criado
 		ultimo_no = no_aux; //
+		
+		i++;
 	}
 	 
 	
 	return 0;
 }
-
-
