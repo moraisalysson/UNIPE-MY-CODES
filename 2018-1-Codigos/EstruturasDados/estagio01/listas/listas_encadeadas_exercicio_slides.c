@@ -26,36 +26,44 @@ t_elemento * getElemento(t_lista lista, int posicao);
 //------------------------------------------------- MAIN
 
 int main() {
-    t_lista p;
-    t_lista no_aux;
+    t_lista m_lista;
+    t_elemento m_dado;
+    int posicao = 0;
 
-    p = criaNo();
-    p->prox = criaNo();
+    m_lista = criaNo();
+//guarguar 3 nomes:
+    strcpy(m_dado.nome, "alysson");
+    inserir(&m_lista, 0, m_dado);
 
-    strcpy((p->dado).nome, "no 1");
-    strcpy(((p->prox)->dado).nome, "no 2");
+    strcpy(m_dado.nome, "silva");
+    inserir(&m_lista, 1, m_dado);
 
-    printf("Elemento: %s\n", (p->dado).nome);
-    printf("Elemento: %s\n", ((p->prox)->dado).nome);
+    strcpy(m_dado.nome, "morais");
+    inserir(&m_lista, 2, m_dado);
 
-    printf("Tamanho: %d\n", getTamanho(p));
+//mostrar os nomes:
+    printf("Nome [pos: 0]: %s\n", (getElemento(m_lista, 0))->nome);
+    printf("Nome [pos: 1]: %s\n", (getElemento(m_lista, 1))->nome);
+    printf("Nome [pos: 2]: %s\n", (getElemento(m_lista, 2))->nome);
 
-    no_aux = p->prox;
+//buscar e mostrar um nome:
+    printf("Informe a posicao para procurar: ");
+    scanf("%d", &posicao);
 
-    p->prox = criaNo();
-    (p->prox)->prox = no_aux; //adicionando o na 2ª posição
+    printf("Nome procurado: %s\n", (getElemento(m_lista, posicao))->nome);
 
-    strcpy(((p->prox)->dado).nome, "no 3");
+//remover um elemento:
+    printf("Informe o nome para apagar: ");
+    scanf("%d", m_dado.nome);
 
-    printf("Elemento: %s\n", p->dado.nome);
-    printf("Elemento: %s\n", p->prox->dado.nome);
-    printf("Elemento: %s\n", p->prox->prox->dado.nome);
+    posicao = getPosicao(m_lista, m_dado);
 
-    printf("Posicao elemento [%s]: %d\n",  p->dado.nome, getPosicao(p, p->dado));
-    printf("Posicao elemento [%s]: %d\n",  p->prox->dado.nome, getPosicao(p, p->prox->dado));
-    printf("Posicao elemento [%s]: %d\n",  p->prox->prox->dado.nome, getPosicao(p, p->prox->prox->dado));
+    remover(&m_lista, posicao - 1);
 
-    printf("Tamanho: %d\n", getTamanho(p));
+    printf("Nome [pos: 0]: %s\n", (getElemento(m_lista, 0))->nome);
+    printf("Nome [pos: 1]: %s\n", (getElemento(m_lista, 1))->nome);
+    printf("Nome [pos: 2]: %s\n", (getElemento(m_lista, 2))->nome);
+
 
     return 0;
 }
