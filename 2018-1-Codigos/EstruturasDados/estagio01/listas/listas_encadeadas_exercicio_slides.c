@@ -139,25 +139,25 @@ int inserir(t_lista * lista, int posicao, t_elemento dado) {
             return 0; //erro: memória insuficiente
 
         novo->dado = dado;
-        novo->prox = * lista;
+        novo->prox = *lista;
         *lista = novo;
 
         return 1;
     }
-
-    p = getNo(* lista, posicao - 1);
+//inserção após a 1ª posição, em lista não vazia
+    p = getNo(* lista, posicao - 1); //pega o endereço do nó  da posição anterior a que se quer inserir
 
     if(p == NULL)
         return 0; //posição inválida
 
-    novo = criaNo();
+    novo = criaNo(); //cria o novo nó
 
     if(novo == NULL)
         return 0; //memória insuficiente
 
     novo->dado = dado;
-    novo->prox = p->prox;
-    p->prox = novo;
+    novo->prox = p->prox; //novo->prox recebe o endereço do nó que virá após ele, que estava armazenado em p
+    p->prox = novo; //e p->prox receberá o enedereço do novo nó
 
     return 1;
 }
@@ -172,23 +172,24 @@ int remover(t_lista * lista, int posicao) {
         return 0; //poisção inválida
 
     if(posicao == 0) {
-        p = *lista;
-        *lista = p->prox;
+        p = *lista; //recebe o endereço armazenado em lista
+        *lista = p->prox; //lista recebe o endereço do próximo nó da própria lista
     } else {
-        anterior = getNo(*lista, posicao - 1);
+        anterior = getNo(*lista, posicao - 1); //pega-se o ENDEREÇO do nó da posição anterior a que se quer remover
 
         if(anterior == NULL)
             return 0;
 
-        p = anterior->prox;
+        p = anterior->prox; //p recebe o endereço do nó que se quer remover
 
         if(p == NULL)
             return 0;
 
-        anterior->prox = p->prox;
+        anterior->prox = p->prox; //anterior recebe o endereço do nó que vinha depois do elemento removido
+        //as alteração são feitas diretamente nos NÓS (referência)
     }
 
-    free(p);
+    free(p); //liberando a memória do nó que foi removido
 
     return 1;
 }
