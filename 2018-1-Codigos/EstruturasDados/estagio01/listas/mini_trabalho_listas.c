@@ -32,6 +32,10 @@ int isCheiaAlunos(t_lista_alunos * lista) {
     return (lista->ultimo_indice == MAX_ALUNOS - 1);
 }
 
+int isVaziaAlunos(t_lista_alunos * lista_alunos) {
+    return (lista_alunos->ultimo_indice == -1);
+}
+
 int deslocaDireita(t_lista_alunos * lista, int posicao) {
     int i = 0;
 
@@ -220,11 +224,25 @@ void inserirDados(t_lista_alunos * lista_alunos) {
 void exibirHistoricos(t_lista_alunos lista_alunos) {
     system("cls");
 
-    printf("%s\n", lista_alunos.vetor_alunos[0].lista_disciplinas->nome_disciplina);
-    printf("%.1f\n", lista_alunos.vetor_alunos[0].lista_disciplinas->nota_final);
+    int index = 0;
+    t_no_disciplina * no_auxiliar;
 
-    printf("%s\n", lista_alunos.vetor_alunos[0].lista_disciplinas->prox_no->nome_disciplina);
-    printf("%.1f\n", lista_alunos.vetor_alunos[0].lista_disciplinas->prox_no->nota_final);
+    no_auxiliar = lista_alunos.vetor_alunos[0].lista_disciplinas;
+
+    printf("---- HISTORICOS ----\n\n");
+
+    if(isVaziaAlunos(&lista_alunos))
+        printf("~~ SEM HISTORICOS PARA EXIBIR ~~\n\n");
+
+    else {
+        while(no_auxiliar->prox_no != NULL) {
+            printf("  > DISCIPLINA: %s\n", no_auxiliar->nome_disciplina);
+            printf("  > NOTA FINAL: %.1f\n", no_auxiliar->nota_final);
+            no_auxiliar = no_auxiliar->prox_no;
+
+            puts("");
+        }
+    }
 
     system("pause");
     system("cls");
