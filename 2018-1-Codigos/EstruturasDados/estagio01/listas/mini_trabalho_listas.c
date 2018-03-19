@@ -17,22 +17,22 @@ typedef struct aluno {
 typedef struct alunos { //lista sequencial
     int ultimo_indice;
     t_elemento_aluno vetor_alunos[MAX_ALUNOS];
-} t_alunos;
+} t_lista_alunos;
 
 //----------------------------------- FUNÇÕES PARA LISTA SEQUENCIAL (ALUNOS)
-t_alunos criarListaAluno() {
-	t_alunos lista;
+t_lista_alunos criarListaAluno() {
+	t_lista_alunos lista;
 
 	lista.ultimo_indice = -1;
 
 	return lista;
 }
 
-int isCheiaAlunos(t_alunos * lista) {
+int isCheiaAlunos(t_lista_alunos * lista) {
     return (lista->ultimo_indice == MAX_ALUNOS - 1);
 }
 
-int deslocaDireita(t_alunos * lista, int posicao) {
+int deslocaDireita(t_lista_alunos * lista, int posicao) {
     int i = 0;
 
     for(i = lista->ultimo_indice + 1; i > posicao; i--)
@@ -41,7 +41,7 @@ int deslocaDireita(t_alunos * lista, int posicao) {
     return 1;
 }
 
-int inserirDadosAluno(t_alunos * lista, int posicao, t_elemento_aluno dados_aluno) {
+int inserirDadosAluno(t_lista_alunos * lista, int posicao, t_elemento_aluno dados_aluno) {
     if ( isCheiaAlunos(lista) || (posicao > lista->ultimo_indice + 1) || (posicao < 0) )
         return 0;
 
@@ -57,7 +57,7 @@ int comparaDadosAlunos(t_elemento_aluno dados_aluno1, t_elemento_aluno dados_alu
     return strcmp(dados_aluno1.matricula, dados_aluno2.matricula);
 }
 
-int getPosicaoAluno(t_alunos * lista, t_elemento_aluno dado_aluno) {
+int getPosicaoAluno(t_lista_alunos * lista, t_elemento_aluno dado_aluno) {
     int i;
 
     for (i = 0; i <= lista->ultimo_indice; i++)
@@ -67,7 +67,7 @@ int getPosicaoAluno(t_alunos * lista, t_elemento_aluno dado_aluno) {
     return -1;
 }
 
-int deslocaAlunosEsquerda(t_alunos * lista, int posicao) {
+int deslocaAlunosEsquerda(t_lista_alunos * lista, int posicao) {
     int i;
 
     for (i = posicao; i < (lista->ultimo_indice); i++)
@@ -76,7 +76,7 @@ int deslocaAlunosEsquerda(t_alunos * lista, int posicao) {
     return 1;
 }
 
-int removerDadosAluno(t_alunos * lista, int posicao) {
+int removerDadosAluno(t_lista_alunos * lista, int posicao) {
     if ( (posicao > lista->ultimo_indice) || (posicao < 0) )
         return 0;
 
@@ -88,7 +88,7 @@ int removerDadosAluno(t_alunos * lista, int posicao) {
 }
 
 //----------------------------------- FUNÇÕES PARA LISTA ENCADEADA (DISCIPLINAS)
-t_no_disciplina * criaNo() {
+t_no_disciplina * criaNoDisciplina() {
     t_no_disciplina * no = (t_no_disciplina *) malloc(sizeof(t_no_disciplina)); //no recebe uma área de memória que é um ponteiro para t_nó
 
     if(no) //se nó for diferente de NULL ou 0:
@@ -119,15 +119,15 @@ t_no_disciplina * getNoDisciplina(t_no_disciplina * lista_disciplinas, int posic
     return 0; //posição inválida
 }
 
-int compara(t_no_disciplina disciplina01, t_no_disciplina disciplina02) {
+int comparaDisciplinas(t_no_disciplina disciplina01, t_no_disciplina disciplina02) {
     return strcmp(disciplina01.nome_disciplina, disciplina02.nome_disciplina);
 }
 
-int getPosicao(t_no_disciplina * lista_disciplinas, t_no_disciplina disciplina) { //verificar adequacao desta função
+int getPosicaoDisciplina(t_no_disciplina * lista_disciplinas, t_no_disciplina disciplina) { //verificar adequacao desta função
     int posicao = 0;
 
     while(lista_disciplinas != NULL) {
-        if(compara(*lista_disciplinas, disciplina) == 0)
+        if(comparaDisciplinas(*lista_disciplinas, disciplina) == 0)
             return posicao;
 
         lista_disciplinas = lista_disciplinas->prox_no;
@@ -142,7 +142,7 @@ int inserirDadosDisciplina(t_no_disciplina ** lista_disciplinas, int posicao, t_
     t_no_disciplina * no_aux, * novo_no;
 
     if(posicao == 0) {  //criando o primeiro nó
-        novo_no = criaNo();
+        novo_no = criaNoDisciplina();
 
         if(novo_no == NULL)
             return 0; //erro: memória insuficiente
@@ -162,7 +162,7 @@ int inserirDadosDisciplina(t_no_disciplina ** lista_disciplinas, int posicao, t_
     if(no_aux == NULL)
         return 0; //posição inválida
 
-    novo_no = criaNo(); //cria o novo nó
+    novo_no = criaNoDisciplina(); //cria o novo nó
 
     if(novo_no == NULL)
         return 0; //memória insuficiente
@@ -192,93 +192,45 @@ void fechaPrograma() {
     printf(">> Programa encerrado pelo usuario.\n");
 }
 
-void inserirDados(t_alunos * lista_alunos) {
-    int contador_disciplinas = 1;
-    t_elemento_aluno aluno;
-    t_no_disciplina disciplina;
+void inserirDados(t_lista_alunos * lista_alunos) {
+    t_elemento_aluno aluno_local;
+    t_no_disciplina disciplina_local;
 
     system("cls");
 
     printf("--- INSERCAO DE DADOS ---\n\n");
 
-    while(1) {
-        printf("Digite os dados solicitaos ou 'parar' para sair \n\n");
+    aluno_local.lista_disciplinas = criaNoDisciplina(); //criando o início da lista
 
-        printf(">>> MATRICULA: ");
-        scanf("%s", aluno.matricula);
+    strcpy(aluno_local.matricula, "1520011423");
 
-        if( ! strcmp(aluno.matricula, "parar"))
-            break;
+    strcpy(disciplina_local.nome_disciplina, "estrutura");
+    disciplina_local.nota_final = 9.9;
 
-        setbuf(stdin, NULL);
+    inserirDadosAluno(lista_alunos, 0, aluno_local);
+    inserirDadosDisciplina(&(lista_alunos->vetor_alunos[0].lista_disciplinas), 0, disciplina_local);
 
-        aluno.lista_disciplinas = criaNo();
+    strcpy(disciplina_local.nome_disciplina, "dados");
+    disciplina_local.nota_final = 9.0;
 
-        contador_disciplinas = 1;
-        while(1) {
-            printf("  > NOME DA DISCIPLINA %d: ", contador_disciplinas);
-            scanf("%[^\n]s", disciplina.nome_disciplina);
+    inserirDadosDisciplina(&(lista_alunos->vetor_alunos[0].lista_disciplinas), 0, disciplina_local);
 
-            if( ! strcmp(disciplina.nome_disciplina, "parar"))
-                break;
+}
 
-            setbuf(stdin, NULL);
+void exibirHistoricos(t_lista_alunos lista_alunos) {
+    system("cls");
 
+    printf("%s\n", lista_alunos.vetor_alunos[0].lista_disciplinas->nome_disciplina);
+    printf("%.1f\n", lista_alunos.vetor_alunos[0].lista_disciplinas->nota_final);
 
-            printf("  > NOTA FINAL: ");
-            scanf("%f", &(disciplina.nota_final) );
-
-            inserirDadosAluno(lista_alunos, lista_alunos->ultimo_indice, aluno); //add no último índice
-
-            //inserirDadosDisciplina(&aluno.lista_disciplinas, 0, *no_disciplina);
-
-
-
-            setbuf(stdin, NULL);
-
-
-
-            contador_disciplinas++;
-
-            puts("");
-        }
-
-        puts("");
-    }
+    printf("%s\n", lista_alunos.vetor_alunos[0].lista_disciplinas->prox_no->nome_disciplina);
+    printf("%.1f\n", lista_alunos.vetor_alunos[0].lista_disciplinas->prox_no->nota_final);
 
     system("pause");
     system("cls");
 }
 
-void exibirHistoricos(t_alunos lista_alunos) {
-    int contador = 0;
-
-    system("cls");
-    printf("---- HISTORICO ----.\n");
-
-/**/printf(">>> Matricula: \n", lista_alunos.vetor_alunos[contador].matricula);
-/**/printf("  > Disciplina: %s\n", lista_alunos.vetor_alunos[contador].lista_disciplinas->nome_disciplina);
-/**/printf("  > Nota final: %.1f\n", lista_alunos.vetor_alunos[contador].lista_disciplinas->nota_final);
-
-
-    while(contador <= lista_alunos.ultimo_indice) {
-        printf(">>> Matricula: \n", lista_alunos.vetor_alunos[contador].matricula);
-
-        while(lista_alunos.vetor_alunos[contador].lista_disciplinas->prox_no != NULL) {
-            printf("  > Disciplina: %s\n", lista_alunos.vetor_alunos[contador].lista_disciplinas->nome_disciplina);
-            printf("  > Nota final: %.1f\n", lista_alunos.vetor_alunos[contador].lista_disciplinas->nota_final);
-        }
-
-        puts("");
-
-        contador++;
-    }
-
-    system("pause");
-    system("cls");
-}
-
-int menu(t_alunos * lista_alunos) {
+int menu(t_lista_alunos * lista_alunos) {
     int opcao = 0;
 
     while(1){
@@ -321,59 +273,32 @@ int menu(t_alunos * lista_alunos) {
 
 //---------------------------------------------------- MAIN
 int main() {
-    int contador_disciplinas = 1;
-    t_elemento_aluno aluno;
-    t_no_disciplina disciplina;
+    t_lista_alunos m_lista_alunos = criarListaAluno();
 
-    t_alunos lista_alunos01 = criarListaAluno();
+    menu(&m_lista_alunos);
+/*
+    m_aluno1.lista_disciplinas = criaNoDisciplina(); //criando o início da lista
 
-    //menu(&lista_alunos01);
+    strcpy(m_aluno1.matricula, "1520011423");
 
+    strcpy(m_disciplina1.nome_disciplina, "estrutura");
+    m_disciplina1.nota_final = 9.9;
 
-    printf("--- INSERCAO DE DADOS ---\n\n");
+    inserirDadosAluno(&listaAlunos01, 0, m_aluno1);
+    inserirDadosDisciplina(&m_aluno1.lista_disciplinas, 0, m_disciplina1);
 
-    while(1) {
-        printf("Digite os dados solicitaos ou 'parar' para sair \n\n");
+    strcpy(m_disciplina1.nome_disciplina, "dados");
+    m_disciplina1.nota_final = 9.0;
 
-        printf(">>> MATRICULA: ");
-        scanf("%s", aluno.matricula);
-
-        if( ! strcmp(aluno.matricula, "parar"))
-            break;
-
-        setbuf(stdin, NULL);
-
-        aluno.lista_disciplinas = criaNo();
-
-        contador_disciplinas = 0;
-        while(1) {
-            printf("  > NOME DA DISCIPLINA %d: ", contador_disciplinas + 1);
-            scanf("%[^\n]s", disciplina.nome_disciplina);
-
-            if( ! strcmp(disciplina.nome_disciplina, "parar"))
-                break;
-
-            setbuf(stdin, NULL);
+    inserirDadosAluno(&listaAlunos01, 0, m_aluno1);
+    inserirDadosDisciplina(&m_aluno1.lista_disciplinas, 0, m_disciplina1);
 
 
-            printf("  > NOTA FINAL: ");
-            scanf("%f", &(disciplina.nota_final) );
+    printf("%s\n", m_aluno1.lista_disciplinas->nome_disciplina);
+    printf("%.1f\n", m_aluno1.lista_disciplinas->nota_final);
 
-            inserirDadosAluno(&lista_alunos01, lista_alunos01.ultimo_indice, aluno); //add no último índice
-
-            inserirDadosDisciplina(&aluno.lista_disciplinas, contador_disciplinas, disciplina);
-
-            setbuf(stdin, NULL);
-
-            contador_disciplinas++;
-
-            puts("");
-        }
-
-        puts("");
-    }
-
-    exibirHistoricos(lista_alunos01);
-
+    printf("%s\n", m_aluno1.lista_disciplinas->prox_no->nome_disciplina);
+    printf("%.1f\n", m_aluno1.lista_disciplinas->prox_no->nota_final);
+*/
     return 0;
 }
