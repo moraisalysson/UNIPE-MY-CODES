@@ -76,6 +76,7 @@ public class Venda {
 		System.out.println("---------- VENDA ----------");
 		System.out.printf(">> Código vendedor: %s%n", vendedor.getCodigo());
 		System.out.printf(">> Nome vendedor: %s%n", vendedor.getNome());
+		System.out.printf(">> Comissão do vendedor: %.2f %% %n", vendedor.getComissao() * 100);
 		System.out.printf(">> Valor da comissão pela venda: R$ %.2f%n%n", this.calcularComissao());
 		
 		System.out.printf(">> Quantidade produtos vendidos: %d%n", this.quantidadeItens);
@@ -83,8 +84,11 @@ public class Venda {
 		System.out.printf(">> Descrição do produto: %s%n", produto.getDescricao());
 		System.out.printf(">> Valor unitário do produto: R$ %.2f%n", produto.getValorVenda());
 		System.out.printf(">> Produto em promoção: %b%n", produto.isPromocao());
-		System.out.printf(">> Valor do desconto:R$ %.2f %n%n", this.desconto * this.valor);
-		
-		System.out.printf("= Valor total da venda: R$ %.2f%n%n", this.calcularValor());
+		if(this.calcularValor() == 0)
+			System.out.println("Esta venda não pode ocorrer, pois o seu valor está menor que o do custo do produto.");
+		else {
+			System.out.printf(">> Valor do desconto: R$ %.2f %n", (this.desconto * produto.getValorVenda() * this.quantidadeItens));	
+			System.out.printf("= Valor total da venda: R$ %.2f%n%n", this.calcularValor());
+		}
 	}
 }

@@ -10,7 +10,7 @@ public class Vendedor {
 		this.nome = c_nome;
 		this.codigo = c_codigo;
 		this.endereco = c_endereco;
-		this.comissao = 0.15d;
+		this.comissao = 0.15d; //15% de comissão para todos os vendedores
 	}
 
 	public String getNome() {
