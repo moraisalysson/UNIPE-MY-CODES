@@ -190,7 +190,7 @@ t_no_disciplina * getDisciplina(t_no_disciplina lista_disciplinas, int posicao) 
 }
 
 //------------------------------------ FUNÇÕES EXTRA
-void fechaPrograma() {
+void fechaPrograma(t_lista_alunos * lista_aluno) {
     //free();
     system("cls");
     printf(">> Programa encerrado pelo usuario.\n");
@@ -199,73 +199,75 @@ void fechaPrograma() {
 void inserirDados(t_lista_alunos * lista_alunos) {
     t_elemento_aluno aluno_local;
     t_no_disciplina disciplina_local;
-    int i_aluno = 0;
+    int i_aluno = (lista_alunos->ultimo_indice) + 1;
     char parar[1] = "n";
 
     system("cls");
 
-    printf("--- INSERCAO DE DADOS ---\n\n");
+    while(1) {
+        printf("    |-------------------|\n");
+        printf("    | INSERCAO DE DADOS |\n");
+        printf("    |-------------------|\n\n");
 
-    if( isCheiaAlunos(lista_alunos) )
-        printf("~~~ Nao e possivel adicionar novos alunos! ~~~\n");
+        if( isCheiaAlunos(lista_alunos) ) {
+            printf("~~~ Nao e possivel adicionar novos alunos! ~~~\n");
+            break;
+        }
 
-    else {
+        printf(">>> MATRICULA: ");
+        scanf("%s", aluno_local.matricula);
+
+        setbuf(stdin, NULL);
+
+        aluno_local.lista_disciplinas = criaNoDisciplina(); //criando o início da lista
+
+        if(aluno_local.lista_disciplinas == NULL) {
+            printf("\n !!!!!! Erro na alocaco de memoria para a disciplina !!!!!!\n");
+            break;
+        }
+
+        inserirDadosAluno(lista_alunos, i_aluno, aluno_local);
+
         while(1) {
-            printf(">>> MATRICULA: ");
-            scanf("%s", aluno_local.matricula);
-
-            setbuf(stdin, NULL);
-            //strcpy(aluno_local.matricula, "1520011423");
-
-            aluno_local.lista_disciplinas = criaNoDisciplina(); //criando o início da lista
-
-            inserirDadosAluno(lista_alunos, i_aluno, aluno_local);
-
-            while(1) {
-                puts("");
-
-                printf("  > DISCIPLINA: ");
-                scanf("%[^\n]s", disciplina_local.nome_disciplina);
-
-                setbuf(stdin, NULL);
-
-                printf("  > NOTA FINAL: ");
-                scanf("%f", &disciplina_local.nota_final);
-
-                //strcpy(disciplina_local.nome_disciplina, "estrutura");
-                //disciplina_local.nota_final = 9.9;
-
-                inserirDadosDisciplina(&(lista_alunos->vetor_alunos[i_aluno].lista_disciplinas), 0, disciplina_local);
-
-                //strcpy(disciplina_local.nome_disciplina, "dados");
-                //disciplina_local.nota_final = 9.0;
-
-                //inserirDadosDisciplina(&(lista_alunos->vetor_alunos[0].lista_disciplinas), 0, disciplina_local);
-                printf("\n >> Deseja adicionar uma nova DISCIPLINA? ['s' ou 'n']: ");
-                scanf("%s", parar);
-
-                if(! strcmp(parar, "n") )
-                    break;
-
-                setbuf(stdin, NULL);
-            }
-
-            printf("\n >> Deseja adicionar um novo ALUNO? ['s' ou 'n']: ");
-            scanf("%s", parar);
-
             puts("");
 
-            if(! strcmp(parar, "n") ) {
-                system("cls");
-                break;
-            }
-
-            system("cls");
+            printf("  > DISCIPLINA: ");
+            scanf("%[^\n]s", disciplina_local.nome_disciplina);
 
             setbuf(stdin, NULL);
 
-            i_aluno++;
+            printf("  > NOTA FINAL: ");
+            scanf("%f", &disciplina_local.nota_final);
+
+            //strcpy(disciplina_local.nome_disciplina, "estrutura");
+            //disciplina_local.nota_final = 9.9;
+
+            inserirDadosDisciplina(&(lista_alunos->vetor_alunos[i_aluno].lista_disciplinas), 0, disciplina_local);
+
+            printf("\n >> Deseja adicionar uma nova DISCIPLINA? ['s' ou 'n']: ");
+            scanf("%s", parar);
+
+            if(! strcmp(parar, "n") )
+                break;
+
+            setbuf(stdin, NULL);
         }
+
+        printf("\n >> Deseja adicionar um novo ALUNO? ['s' ou 'n']: ");
+        scanf("%s", parar);
+
+        puts("");
+
+        if(! strcmp(parar, "n") ) {
+            system("cls");
+            break;
+        }
+
+        system("cls");
+
+        setbuf(stdin, NULL);
+
+        i_aluno++;
     }
 }
 
@@ -275,7 +277,9 @@ void exibirHistoricos(t_lista_alunos lista_alunos) {
     int i_aluno = 0;
     t_no_disciplina * no_auxiliar;
 
-    printf("---- HISTORICOS ----\n\n");
+    printf("    |------------|\n");
+    printf("    | HISTORICOS |\n");
+    printf("    |------------|\n\n");
 
     if(isVaziaAlunos(&lista_alunos))
         printf("~~ SEM HISTORICOS PARA EXIBIR ~~\n\n");
@@ -288,10 +292,8 @@ void exibirHistoricos(t_lista_alunos lista_alunos) {
 
             while(no_auxiliar->prox_no != NULL) {
                 printf("  > DISCIPLINA: %s\n", no_auxiliar->nome_disciplina);
-                printf("  > NOTA FINAL: %.1f\n", no_auxiliar->nota_final);
+                printf("  > NOTA FINAL: %.1f\n\n", no_auxiliar->nota_final);
                 no_auxiliar = no_auxiliar->prox_no;
-
-                puts("");
             }
 
             printf("----------------------\n");
@@ -302,7 +304,7 @@ void exibirHistoricos(t_lista_alunos lista_alunos) {
     system("cls");
 }
 
-int menu(t_lista_alunos * lista_alunos) {
+void menu(t_lista_alunos * lista_alunos) {
     int opcao = 0;
 
     while(1){
@@ -321,7 +323,7 @@ int menu(t_lista_alunos * lista_alunos) {
 
         switch(opcao) {
             case 0:
-                fechaPrograma();
+                fechaPrograma(lista_alunos);
                 break;
 
             case 1:
@@ -348,29 +350,6 @@ int main() {
     t_lista_alunos m_lista_alunos = criarListaAluno();
 
     menu(&m_lista_alunos);
-/*
-    m_aluno1.lista_disciplinas = criaNoDisciplina(); //criando o início da lista
 
-    strcpy(m_aluno1.matricula, "1520011423");
-
-    strcpy(m_disciplina1.nome_disciplina, "estrutura");
-    m_disciplina1.nota_final = 9.9;
-
-    inserirDadosAluno(&listaAlunos01, 0, m_aluno1);
-    inserirDadosDisciplina(&m_aluno1.lista_disciplinas, 0, m_disciplina1);
-
-    strcpy(m_disciplina1.nome_disciplina, "dados");
-    m_disciplina1.nota_final = 9.0;
-
-    inserirDadosAluno(&listaAlunos01, 0, m_aluno1);
-    inserirDadosDisciplina(&m_aluno1.lista_disciplinas, 0, m_disciplina1);
-
-
-    printf("%s\n", m_aluno1.lista_disciplinas->nome_disciplina);
-    printf("%.1f\n", m_aluno1.lista_disciplinas->nota_final);
-
-    printf("%s\n", m_aluno1.lista_disciplinas->prox_no->nome_disciplina);
-    printf("%.1f\n", m_aluno1.lista_disciplinas->prox_no->nota_final);
-*/
     return 0;
 }
