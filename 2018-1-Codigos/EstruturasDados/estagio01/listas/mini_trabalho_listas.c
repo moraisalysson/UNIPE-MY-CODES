@@ -189,9 +189,23 @@ t_no_disciplina * getDisciplina(t_no_disciplina lista_disciplinas, int posicao) 
     return NULL;
 }
 
-//------------------------------------ FUNÇÕES EXTRA
-void fechaPrograma(t_lista_alunos * lista_aluno) {
-    //free();
+//------------------------------------ FUNÇÕES EXTRAS
+void fechaPrograma(t_lista_alunos * lista_alunos) {
+    int i_aluno = 0;
+    t_no_disciplina * no_auxiliar = NULL;
+    t_no_disciplina * no_anterior = NULL;
+
+    for(i_aluno = 0; i_aluno <= lista_alunos->ultimo_indice; i_aluno++) {
+        no_auxiliar = lista_alunos->vetor_alunos[i_aluno].lista_disciplinas;
+
+        while(no_auxiliar->prox_no != NULL) {
+            no_anterior = no_auxiliar;
+            no_auxiliar = no_auxiliar->prox_no;
+            free(no_anterior); //liberando os nós
+            no_anterior = NULL;
+        }
+    }
+
     system("cls");
     printf(">> Programa encerrado pelo usuario.\n");
 }
