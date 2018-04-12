@@ -22,5 +22,16 @@ public class Questao02 {
 			System.out.print(valor + " ");
 		
 		System.out.println(); //pra pular uma linha
+		
+		recursiva(array, 0);
+		
+		System.out.println(); //pra pular uma linha
+	}
+	
+	public void recursiva(int array[], int cont) {
+	    System.out.print(array[cont] + " ");
+		cont++;
+		if(cont < array.length)
+			recursiva(array, cont);
 	}
 }
