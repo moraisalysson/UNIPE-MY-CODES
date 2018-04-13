@@ -6,16 +6,24 @@ public class Questao03 {
 	private int TAM_LISTA = 10;
 	private int[] lista = new int[TAM_LISTA];
 	Scanner input = new Scanner(System.in);
-	
+
+/**
+ * Método para receber os valores que vão ser inseridos no array
+ */
+
 	public void inputValores() {
-		System.out.printf("Informe 10 valores: ");
+		System.out.printf("Informe 10 valores em uma única linha: ");
 		for(int i = 0; i < lista.length; i++) {
 			lista[i] = input.nextInt();
 		}
 		
 		this.ordenaListaCrescente();
 	}
-	
+
+/**
+ * Método para ordenar o array de forma crescente
+ */
+
 	private void ordenaListaCrescente() {
 		int temp = 0;
 		
@@ -30,11 +38,21 @@ public class Questao03 {
 		}	
 	}
 	
-	
+/**
+ * Método para imprimir os valores da lista
+ */
 	public void imprimeListaOrdenada() {
 		for(int i = 0; i < lista.length; i++)
 			System.out.printf("[%d] = %d%n", i, lista[i]);
 	}
+
+/**
+ * Método recursivo de busca binária
+ * @param inicio
+ * @param fim
+ * @param valorProcurado
+ * @return int índice do valor procurado ou -1
+ */
 	
 	public int buscaBinaria(int inicio, int fim, int valorProcurado) {
 		int meio = 0;
