@@ -7,7 +7,7 @@ public class Usuario {
 	private String dataNascimento;
 	private String telefone;
 	private String senha;
-	private Pontos saldoPontos = new Pontos();
+	private Pontos pontos = new Pontos();
 	
 	public String getNome() {
 		return nome;
@@ -45,13 +45,18 @@ public class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public Pontos getSaldoPontos() {
-		return saldoPontos;
-	}
-	public void setSaldoPontos(Pontos saldoPontos) {
-		this.saldoPontos = saldoPontos;
+	
+	public int getPontosRecebidos() {
+		return this.pontos.getRecebidos();
 	}
 	
+	public int getPontosTrocados() {
+		return this.pontos.getTrocados();
+	}
 	
+	public int getSaldoPontos() {
+		return this.pontos.getSaldoPontos();
+	}
+		
 	
 }

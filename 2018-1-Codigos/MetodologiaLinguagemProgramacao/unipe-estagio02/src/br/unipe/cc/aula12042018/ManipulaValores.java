@@ -73,12 +73,14 @@ public class ManipulaValores {
 		while(true) {
 			valor = leitor.nextInt();
 			
+			leitor.close();
+			
 			if(valor > 0)
 				return valor;
 			else
 				System.out.println("Informe um valor maior que zero!!");
 		}
-		
+	
 	}
 	
 }
