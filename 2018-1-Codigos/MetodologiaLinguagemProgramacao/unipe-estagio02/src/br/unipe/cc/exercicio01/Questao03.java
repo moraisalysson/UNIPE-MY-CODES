@@ -8,7 +8,7 @@ public class Questao03 {
 	Scanner input = new Scanner(System.in);
 	
 	public void inputValores() {
-		System.out.printf("Informe 10 valores: ");
+		System.out.printf("Informe 10 valores em uma única linha: ");
 		for(int i = 0; i < lista.length; i++) {
 			lista[i] = input.nextInt();
 		}
