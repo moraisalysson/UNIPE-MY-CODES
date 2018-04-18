@@ -1,8 +1,17 @@
 package br.unipe.cc.exercicio01;
 
+/**
+ * @author Morais, Alysson
+ */
+
 public class Questao02 {
 
-	public void imprimeElementosArray(int array[]) {
+/**
+ * Método com 3 modos diferentes de imprimir os elementos do array
+ * @param array
+ */
+	
+	public void imprimeElementosArray(int[] array) {
 		int i = 0;
 		
 		for(i = 0; i < array.length; i++)
@@ -27,8 +36,14 @@ public class Questao02 {
 		
 		System.out.println(); //pra pular uma linha
 	}
-	
-	public void recursiva(int array[], int cont) {
+
+/**
+ * Método recursivo (extra) que também imprime os elementos do array
+ * @param array
+ * @param cont
+ */
+
+	public void recursiva(int[] array, int cont) {
 	    System.out.print(array[cont] + " ");
 		cont++;
 		if(cont < array.length)
