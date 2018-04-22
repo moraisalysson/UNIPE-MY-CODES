@@ -1,50 +1,49 @@
 ;SIMULANDO DO WHILE
-    ;  multiplicando = 3 (alterar valor na linha 17)
-    ;  multiplicador = 5 (alterar valor na linha 23)
-    ;  produto = 0
-    ;  while(multiplicador > 0) {
-    ;    resultado = resultado + multiplicando; 
-    ;    multiplicador = multiplicador - 1; }
+    ;  x = 0 (alterar valor na linha 17)
+    ;  y = 2 (alterar valor na linha 21)
+    ;  do {
+    ;    x = x + y;
+    ;  } while(x <= 10); 
     
     ; base = 100 (0x64): endereço base dos operandos e tbm guarda o valor 0
-    ; base + 4 (0x68): endereço de "multiplicando"
-    ; base + 8 (0x6C): endereço de "multiplicador"
-    ; base + 12 (0x70): endereço de "produto"
+    ; base + 4 (0x68): endereço de "x"
+    ; base + 8 (0x6C): endereço de "y"
 
 
-    addi $0, $0, 100 ; 0: $0 recebe 100 (0x64), endereço base dos operandos
+    addi $0, $0, 100             ; 0 : $0 recebe 100 (0x64), endereço base dos operandos
 
-    addi $1, $1, 3 ; 1: atribuindo um VALOR para "multiplicando" no $1
+    addi $1, $1, 0               ; 1 : atribuindo um VALOR para "x" no $1
 
-    sw $1, 4($0) ; 2: transf o VALOR de $1 para endereço de "multiplicando" (104 = 0x68)
+    sw $1, 4($0)                 ; 2 : transf o VALOR de $1 para endereço de "x" (base + 4)
 
-    lw $1, 0($0) ; 3: zerando $1
+    lw $1, 0($0)                 ; 3 : zerando $1
 
-    addi $1, $1, 5 ; 4: atribuindo um VALOR para "multiplicador" no $1
+    addi $1, $1, 2               ; 4 : atribuindo um VALOR para "y" no $1
 
-    sw $1, 8($0) ; 5: transf o VALOR de $1 para endereço de "multiplicador" (108 = 0x6C)
+    sw $1, 8($0)                 ; 5 : transf o VALOR de $1 para endereço de "y" (base + 8)
 
-;verificando se "multiplicador" > 0:
-    lw $1, 4($0) ; 6: busca VALOR de "multiplicando" da memória e atribui a $1
+    lw $1, 4($0)                 ; 6 : busca VALOR de "x" da memória e atribui a $1
 
-    lw $2, 8($0) ; 7: busca VALOR de "multiplicador" da memória e atribui a $2
+    lw $2, 8($0)                 ; 7 : busca VALOR de "y" da memória e atribui a $2
 
-    addi $3, $3, 1 ; 8: carrega o $3 com o valor 1
+    addi $3, $3, 10              ; 8 : $3 = $3 + 10
 
-    LOOP: ; 9
+    LOOP:
 
-        beq $2, $4, FINALIZAR ; 10: se $2(multiplicador) == $4(0), então pula para label FIM
+        add $1, $1, $2;          ; 0 : x($1) = x($1) + y($2)
 
-        add $5, $5, $1; ; 11: $5 recebe a soma do "multiplicando". É o produto da multiplicação.
+        beq $1, $3, FINALIZAR    ; 10 : se $1(x) == $2(y), então pula para label FINALIZAR
 
-        sub $2, $2, $3; ; 12: decrementando em 1 o valor do "multiplicador"
+        slt $4, $1, $3           ; 11 : se $1(x) >= 10, $4 = 0, senão $4 = 1
 
-    j LOOP ; 13                        
+        beq $5, $4, FINALIZAR    ; 12 : se $5(0) >= $4(0), pula para FINALIZAR
 
-    FINALIZAR: ; 14
+    j LOOP                       ; 13                        
 
-        sw $5, 12($0) ; 15: salva o valor do produto na memória
+    FINALIZAR:                   
 
-    FIM: ; 16: fim do programa com WHILE
+        sw $1, 12($0)            ; 14 : salva o valor da SOMA na memória (base + 12)
+ 
+    FIM:                         
     
-    j FIM ; 17: loop infinito no final do programa
+    j FIM                        ; 15

@@ -12,47 +12,54 @@
     ; base + 12 (0x70): endereço de "c"
 
 
-    addi $0, $0, 100 ; 0: $0 recebe 100 (0x64), endereço base dos operandos
+    addi $0, $0, 100       ; 0 : $0 recebe 100 (0x64), endereço base dos operandos
 
-    addi $1, $1, 3 ; 1: atribuindo um VALOR para "a" no $1
+    addi $1, $1, 3         ; 1 : atribuindo um VALOR para "a" no $1
 
-    sw $1, 4($0) ; 2: transf o VALOR de $1 para endereço de "a" (104 = 0x68)
+    sw $1, 4($0)           ; 2 : transf o VALOR de $1 para endereço de "a" (104 = 0x68)
 
-    lw $1, 0($0) ; 3: zerando $1
+    lw $1, 0($0)           ; 3 : zerando $1
 
-    addi $1, $1, 1 ; 4: atribuindo um VALOR para "b" no $1
+    addi $1, $1, 1         ; 4 : atribuindo um VALOR para "b" no $1
 
-    sw $1, 8($0) ; 5: transf o VALOR de $1 para endereço de "b" (108 = 0x6C)
+    sw $1, 8($0)           ; 5 : transf o VALOR de $1 para endereço de "b" (108 = 0x6C)
 
 ;verificando se "a" > "b":
-    lw $1, 4($0) ; 6: busca VALOR de "a" da memória e atribui a $1
+    lw $1, 4($0)           ; 6 : busca VALOR de "a" da memória e atribui a $1
 
-    lw $2, 8($0) ; 7: busca VALOR de "b" da memória e atribui a $2
+    lw $2, 8($0)           ; 7 : busca VALOR de "b" da memória e atribui a $2
 
-    slt $3, $1, $2 ; 8: verificando se $1 >= $2: TRUE: $3 = 0, FALSE: $3 = 1
+    slt $3, $1, $2         ; 8 : verificando se $1 >= $2: TRUE: $3 = 0, FALSE: $3 = 1
 
-    addi $4, $4, 1 ; 9: carrega o $4 com o valor 1
+    addi $4, $4, 1         ; 9 : carrega o $4 com o valor 1
 
-    beq $3, $4, JMPIF ; 10: se $3 == $4(1), indicando que $1 é < $2, então pula para label JMPIF (pula o if)                         
+    beq $3, $4, JMPIF      ; 10 : se $3 == $4(1), indicando que $1 é < $2, então pula para label JMPIF (pula o if)                         
 
-    beq $1, $2, JMPIF ; 11: se $1 == $2, pular para label JMPIF (pula o if)
+    beq $1, $2, JMPIF      ; 11: se $1 == $2, pular para label JMPIF (pula o if)
 
 ;fim da verificação
 
 ;IF TRUE (não houve nenhum pulo para JMPIF)
-    lw $1, 4($0) ; 12: carrega "a" para $1
-    lw $2, 8($0) ; 13: carrega "b" para $2
-    sub $1, $1, $2 ; 14: $1 (c) = "a" - "b"
-    sw $1, 12($0) ; 15: transf o VALOR de $1 para endereço de "c" (112 = 0x70)
 
-    j FIM ; 16: pula o JMPIF
+    lw $1, 4($0)           ; 12: carrega "a" para $1
 
-    JMPIF: ; 17
-         lw $1, 8($0) ; 18: carrega "b" para $1
-         lw $2, 4($0) ; 19: carrega "a" para $2
-         sub $1, $1, $2 ; 20: $1 = "b" - "a"
-         sw $1, 12($0) ; 21: transf o VALOR de $1 para endereço de "c" (112 = 0x70)
+    lw $2, 8($0)           ; 13: carrega "b" para $2
 
-    FIM: ; 22: fim do programa com if-else
+    sub $1, $1, $2         ; 14: $1 (c) = "a" - "b"
+
+    sw $1, 12($0)          ; 15: transf o VALOR de $1 para endereço de "c" (112 = 0x70)
+
+    j FIM                  ; 16: pula o JMPIF
+
+    JMPIF: 
+         lw $1, 8($0)      ; 17: carrega "b" para $1
+
+         lw $2, 4($0)      ; 18: carrega "a" para $2
+
+         sub $1, $1, $2    ; 19: $1 = "b" - "a"
+
+         sw $1, 12($0)     ; 20: transf o VALOR de $1 para endereço de "c" (112 = 0x70)
+
+    FIM: 
     
-    j FIM ; 23: loop infinito no final do programa
+    j FIM                  ; 21: loop infinito no final do programa
