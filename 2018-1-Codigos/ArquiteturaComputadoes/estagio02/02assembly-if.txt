@@ -1,6 +1,6 @@
 ;SIMULANDO IF
-    ;  a = 3 (alterar valor na linha 18)
-    ;  b = 1 (alterar valor na linha 24)
+    ;  a = 3 (alterar valor na linha 17)
+    ;  b = 1 (alterar valor na linha 23)
     ;  c = 0
     ;  if(a > b) {
     ;    c = a - b; } <- TRUE: deve ser executado com os valores atuais (a=3 e b=1)
@@ -29,13 +29,13 @@
 
     lw $2, 8($0) ; 7: busca VALOR de "b" da memória e atribui a $2
 
-    beq $1, $2, CMPEQ ; x: se $1 == $2, pular para label JMPIF (pula o if)
-
     slt $3, $1, $2 ; 8: verificando se $1 >= $2: TRUE: $3 = 0, FALSE: $3 = 1
 
-    addi $4, $4, 1 ; x: carrega o $4 com o valor 1
+    addi $4, $4, 1 ; 9: carrega o $4 com o valor 1
 
-    beq $3, $4, CMPEQ ; x: se $3 == $4(1), pular para label JMPIF (pula o if)
+    beq $3, $4, JMPIF ; 10: se $3 == $4(1), indicando que $1 é < $2, então pula para label JMPIF (pula o if)                         
+
+    beq $1, $2, JMPIF ; 11: se $1 == $2, pular para label JMPIF (pula o if)
 
 ;fim da verificação
 
