@@ -59,7 +59,7 @@ t_pessoa removerPessoa(t_fila * fila) {
 }
 
 void exibirFila(t_fila fila) {
-    int i_inicio_fim = fila.inicio, i_elementos = 0;
+    int i = 0, index = 0;
 
     if(filaItsVazia(fila)) {
         printf(">> A fila esta vazia.\n");
@@ -67,18 +67,11 @@ void exibirFila(t_fila fila) {
     }
 
     printf("\nFILA: \n");
-    for(; i_inicio_fim <= fila.fim; i_inicio_fim++, i_elementos++) {
-        printf("%do = %s\n", i_elementos + 1, fila.vetor[i_inicio_fim].nome);
+    for(i = 0, index = fila.inicio; i < fila.qnt_elementos; i++, index = (fila.inicio + i) % MAX_PESSOAS) {
+    	
+        printf("%do = %s\n", i + 1, fila.vetor[index].nome);
 
-//verificar lógica:
-    /*    if(fila.fim < fila.inicio)
-            for(i_inicio_fim = 0; i_inicio_fim < fila.inicio; i_inicio_fim++, i_elementos++) {
-                printf("%do = %s\n", i_elementos + 1, fila.vetor[i_inicio_fim].nome);
-            }
-    */
     }
-
-
 
 }
 
