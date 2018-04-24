@@ -105,18 +105,13 @@ void exibirFila(t_fila fila) {
     }
 
 }
-/*
+
 int entramPessoas(t_fila * fila) {
     int i = 0;
     t_pessoa nova_pessoa;
 
     printf("--- ENTRANDO PESSOAS NA FILA ---\n");
     for(; i < 4; i++) {
-        if(filaItsCheia(*fila)) {
-            printf(">> Nao ha mais espaco na fila.\n");
-            return 0;
-        }
-
         printf("\n%do da fila: ", i + 1);
         scanf("%s", nova_pessoa.nome);
 
@@ -154,17 +149,17 @@ int saemPessoas(t_fila * fila) {
 
     return 1;
 }
-*/
+
 
 int main() {
-/*
-    t_fila main_fila = criarFila(); //a) criar a fila
 
-    entramPessoas(&main_fila); //b) entram 4 pessoas e a cada entrada mostrar as pessoas da fila na ordem "da primeira até a última"
+    t_fila * main_fila = criarCabeca(); //a) criar fila
 
-    saemPessoas(&main_fila); //c) saem 3 pessoas e a cada saída mostrar as pessoas da fila na ordem "da primeira até a última"
+    entramPessoas(main_fila); //b) entram 4 pessoas e a cada entrada mostrar as pessoas da fila na ordem "da primeira até a última"
 
-    entramPessoas(&main_fila); //d) entram mais 4 pessoas e a cada entrada mostrar as pessoas da fila na ordem "da primeira até a última"
-*/
+    saemPessoas(main_fila); //c) saem 3 pessoas e a cada saída mostrar as pessoas da fila na ordem "da primeira até a última"
+
+    entramPessoas(main_fila); //d) entram mais 4 pessoas e a cada entrada mostrar as pessoas da fila na ordem "da primeira até a última"
+
     return 0;
 }
