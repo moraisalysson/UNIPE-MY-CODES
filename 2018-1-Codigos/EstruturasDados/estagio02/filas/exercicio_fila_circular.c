@@ -68,7 +68,7 @@ void exibirFila(t_fila fila) {
 
     printf("\nFILA: \n");
     for(i = 0, index = fila.inicio; i < fila.qnt_elementos; i++, index = (fila.inicio + i) % MAX_PESSOAS) {
-    	
+
         printf("%do = %s\n", i + 1, fila.vetor[index].nome);
 
     }
@@ -128,11 +128,11 @@ int saemPessoas(t_fila * fila) {
 int main() {
     t_fila main_fila = criarFila(); //a) criar a fila
 
-    entramPessoas(&main_fila); //b) entram 4 pessoas e a cada entrada mostrar as pessoas da fila na ordem "da primeira atÃ© a Ãºltima"
+    entramPessoas(&main_fila); //b) entram 4 pessoas e a cada entrada mostrar as pessoas da fila na ordem "da primeira até a última"
 
-    saemPessoas(&main_fila); //c) saem 3 pessoas e a cada saÃ­da mostrar as pessoas da fila na ordem "da primeira atÃ© a Ãºltima"
+    saemPessoas(&main_fila); //c) saem 3 pessoas e a cada saída mostrar as pessoas da fila na ordem "da primeira até a última"
 
-    entramPessoas(&main_fila); //d) entram mais 4 pessoas e a cada entrada mostrar as pessoas da fila na ordem "da primeira atÃ© a Ãºltima"
+    entramPessoas(&main_fila); //d) entram mais 4 pessoas e a cada entrada mostrar as pessoas da fila na ordem "da primeira até a última"
 
     return 0;
 }
