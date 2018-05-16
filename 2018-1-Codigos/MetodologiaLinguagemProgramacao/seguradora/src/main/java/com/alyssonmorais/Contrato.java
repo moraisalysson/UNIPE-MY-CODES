@@ -27,4 +27,7 @@ public abstract class Contrato  {
 		this.valorImovel = valorImovel;
 	}
 	
+	public abstract void cadastroContrato();
+
+	
 }

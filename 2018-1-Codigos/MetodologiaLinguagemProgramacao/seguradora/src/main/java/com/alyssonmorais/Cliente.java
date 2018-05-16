@@ -6,6 +6,8 @@ package com.alyssonmorais;
  *
  */
 
+import java.util.Scanner;
+
 public class Cliente {
 	
 	private int codigo;
@@ -38,6 +40,25 @@ public class Cliente {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	public void cadastroCliente() {
+		Scanner input = new Scanner(System.in);
+		TipoPessoa tipoPessoa = TipoPessoa.FISICA; //inicializando o tipo
+		
+		System.out.println("Informe o nome do cliente: ");
+		this.setNome( input.nextLine() );
+		
+		input.nextLine(); //limpa o buffer
+		
+		System.out.println("Pessoa Fisica ou Pessoa Juridica: ");
+		tipoPessoa.setTipo( input.nextLine() );
+		
+		input.nextLine(); //limpa o buffer
+		
+		this.setTipopessoa(tipoPessoa);
+		
+		input.close();
 	}
 
 

@@ -6,16 +6,15 @@ package com.alyssonmorais;
  *
  */
 
-public enum TipoZona {
-
-	URBANA(1, "Zona Urbana"),
-	SUBURBANA(2, "Zona Suburbana"),
-	RURAL(3, "Zona Rural");
+public enum TipoRamo {
+	COMERCIO(1, "Comercio"),
+	INDUSTRIA(2, "Industrica"),
+	AGROPECUARIA(3, "Agropecuaria");
 	
 	private int codigo;
 	private String descricao;
 	
-	private TipoZona(int codigo, String descricao) {
+	TipoRamo(int codigo, String descricao) {
 		this.codigo = codigo;
 		this.descricao = descricao;
 	}
@@ -35,6 +34,6 @@ public enum TipoZona {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
+	
 	
 }
