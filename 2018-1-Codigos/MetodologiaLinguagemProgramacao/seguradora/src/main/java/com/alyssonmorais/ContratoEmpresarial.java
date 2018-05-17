@@ -41,17 +41,17 @@ public class ContratoEmpresarial extends Contrato {
 	public void setValorSeguro() {
 		double soma_valor_seguro = 0.0d;
 		
-		soma_valor_seguro = soma_valor_seguro + (this.valor_seguro * 1.04d);
+		soma_valor_seguro = soma_valor_seguro + (this.getValorImovel() * 1.04d);
 		
-		soma_valor_seguro = soma_valor_seguro + (this.valor_seguro * ( (this.numero_funcionarios % 10) * 1.002d) );
+		soma_valor_seguro = soma_valor_seguro + (this.getValorImovel() * ( (this.numero_funcionarios / 10) * 1.002d) );
 		
-		soma_valor_seguro = soma_valor_seguro + (this.valor_seguro * ( (this.numero_visitas_diarias % 200) * 1.003d) );
+		soma_valor_seguro = soma_valor_seguro + (this.getValorImovel() * ( (this.numero_visitas_diarias / 200) * 1.003d) );
 		
 		if(this.ramo_atuacao == TipoRamo.INDUSTRIA)
-			soma_valor_seguro = soma_valor_seguro + (this.valor_seguro * 1.01d);
+			soma_valor_seguro = soma_valor_seguro + (this.getValorImovel() * 1.01d);
 		
 		else if(this.ramo_atuacao == TipoRamo.COMERCIO)
-			soma_valor_seguro = soma_valor_seguro + (this.valor_seguro * 1.005d);
+			soma_valor_seguro = soma_valor_seguro + (this.getValorImovel() * 1.005d);
 	}
 	
 	public double getValorSeguro() {
@@ -75,14 +75,14 @@ public class ContratoEmpresarial extends Contrato {
 
 		input.nextLine(); //limpa o buffer
 		
-		System.out.println("Informe o ramo de atuação: ");
+		System.out.println("Informe o ramo de atuaÃ§Ã£o: ");
 		ramo.setCodigo( input.nextInt() );
 		
 		this.setRamo_atuacao(ramo);
 		
 		input.nextLine(); //limpa o buffer
 		
-		System.out.println("Informe o valor do imóvel: ");
+		System.out.println("Informe o valor do imÃ³vel: ");
 		this.setValorImovel( input.nextFloat() );
 		
 		input.nextLine();
