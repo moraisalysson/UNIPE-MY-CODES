@@ -1,4 +1,4 @@
-package com.alyssonmorais;
+package tiposenums;
 
 /**
  * 
@@ -7,12 +7,12 @@ package com.alyssonmorais;
  */
 
 public enum TipoPessoa {
-	
-	FISICA("Pessoa Física"),
-	JURIDICA("Pessoa Jurídica");
-	
+
+	FISICA("Pessoa Física"), 
+	JURIDICA("Pessoa Juridica");
+
 	private String tipo;
-	
+
 	private TipoPessoa(String tipo) {
 		this.tipo = tipo;
 	}
@@ -24,6 +24,5 @@ public enum TipoPessoa {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	
-	
+   
 }

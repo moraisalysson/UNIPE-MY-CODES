@@ -1,4 +1,4 @@
-package com.alyssonmorais;
+package modelo;
 
 /**
  * 
@@ -6,28 +6,24 @@ package com.alyssonmorais;
  *
  */
 
-public abstract class Contrato  {
-	
+public abstract class Contrato {
+
 	private Cliente cliente;
-	private float valorImovel;
+	private Float valorImovel;
+	
+	public abstract Float obterValorSeguro(); 
 	
 	public Cliente getCliente() {
 		return cliente;
 	}
-	
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	
-	public float getValorImovel() {
+	public Float getValorImovel() {
 		return valorImovel;
 	}
-	
-	public void setValorImovel(float valorImovel) {
+	public void setValorImovel(Float valorImovel) {
 		this.valorImovel = valorImovel;
 	}
-	
-	public abstract void cadastroContrato();
-
-	
+		
 }

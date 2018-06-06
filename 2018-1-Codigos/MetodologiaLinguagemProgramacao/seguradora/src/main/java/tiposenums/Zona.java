@@ -1,4 +1,4 @@
-package com.alyssonmorais;
+package tiposenums;
 
 /**
  * 
@@ -6,18 +6,19 @@ package com.alyssonmorais;
  *
  */
 
-public enum TipoRamo {
-	COMERCIO(1, "Comercio"),
-	INDUSTRIA(2, "Industrica"),
-	AGROPECUARIA(3, "Agropecuaria");
+public enum Zona {
 	
-	private int codigo;
-	private String descricao;
+	RURAL (1, "Rural"),
+	SUBURBANA (2, "Suburbana"),
+	URBANA (3, "Urbana");
 	
-	TipoRamo(int codigo, String descricao) {
-		this.codigo = codigo;
-		this.descricao = descricao;
-	}
+    private int codigo;
+    private String descricao;
+    
+    private Zona(int codigo, String descricao) {
+    	this.codigo = codigo;
+    	this.descricao = descricao;
+    }
 
 	public int getCodigo() {
 		return codigo;
