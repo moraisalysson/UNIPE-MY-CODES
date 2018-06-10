@@ -5,7 +5,7 @@
 
 typedef struct elemento {
     char nome[50];
-    int numero;
+    unsigned long int numero;
     int id;
 } t_elemento;
 
@@ -151,73 +151,154 @@ t_elemento * getElemento(t_lista lista, int posicao) {
     return NULL;
 }
 
-void exibirAgenda(t_lista lista) {
-    t_no * aux = lista;
+void exibirAgenda(t_lista agenda) {
+    t_no * aux = agenda;
 
-    if(isVazia(lista)) {
+    if(isVazia(agenda)) {
         printf(">> A agenda esta vazia.\n");
         return;
     }
 
     printf("\nAGENDA: \n");
     while(aux != NULL) {
-        printf("Nome = %s\n", aux->dado.nome);
-        printf("ID = %d\n", aux->dado.id);
-        printf("Telefone = %d\n", aux->dado.nome);
+        printf("ID: %d\n", aux->dado.id);
+        printf("Nome: %s\n", aux->dado.nome);
+        printf("Telefone: %lu\n\n", aux->dado.numero);
+        aux = aux->prox;
+    }
+}
+
+int readArquivoParaArray(FILE * arquivo, char array[]) {
+    int i = 0;
+
+    arquivo = fopen("dados.csv", "r");
+
+    if(arquivo == 0) {
+        printf("erro ao abrir o arquivo\n");
+        fclose(arquivo);
+        return 0;
+    }
+
+    printf("arquivo aberto com sucesso\n");
+
+    while ( ! feof(arquivo) ) {
+        array[i] = fgetc(arquivo);
+
+        if(array[i] == ';')
+            array[i + 1] = '\0';
+
+        if(array[i] == '\n' || array[i] == ' ')
+            i--;
+
+        i++;
+    }
+
+    fclose(arquivo);
+
+    return 1;
+}
+
+int dadosDoArrayParaAgenda(t_lista * agenda, char array[]) {
+    t_elemento contato;
+    int i = 0, j = 0, itsNome = 1;
+    char array_aux[50] = "";
+
+    contato.id = 1;
+
+    if(strlen(array) == 0)
+        return 0;
+
+    for(; i <= strlen(array); i++) {
+        if(array[i] == ';') {
+            if(itsNome) {
+                strcpy(contato.nome, array_aux);
+                itsNome = 0;
+                j = 0;
+                i++;
+
+            } else {
+                contato.numero = atoi(array_aux);
+
+                inserir(agenda, contato);
+                contato.id++;
+
+                itsNome = 1;
+                j = 0;
+                i++;
+            }
+        }
+
+        array_aux[j] = array[i];
+        array_aux[j + 1] = '\0';
+        j++;
+    }
+
+    return 1;
+}
+
+int arquivoBackupAgenda(FILE * arquivo, t_lista agenda) {
+    t_no * aux = agenda;
+
+    arquivo = fopen("backup.csv", "w");
+
+   if(arquivo == 0) {
+        printf("erro ao abrir o arquivo\n");
+        fclose(arquivo);
+        return 0;
+    }
+
+    printf("arquivo aberto com sucesso\n");
+
+    while(aux != NULL) {
+        fprintf(arquivo, "%d;%s;%lu;\n", aux->dado.id, aux->dado.nome, aux->dado.numero);
         aux = aux->prox;
     }
 
+    fclose(arquivo);
+
+    return 1;
+}
+
+int exibirAgendaBacukp(FILE * arquivo) {
+    char array[1000] = "";
+    int i = 0;
+
+    arquivo = fopen("backup.csv", "r");
+
+   if(arquivo == 0) {
+        printf("erro ao abrir o arquivo\n");
+        fclose(arquivo);
+        return 0;
+    }
+
+    printf("\nDados do arquivo de backup (ID; nome; telefone): \n");
+    while ( ! feof(arquivo) ) {
+        array[i] = fgetc(arquivo);
+
+        printf("%c", array[i]);
+
+        i++;
+    }
+
+
+    return 1;
 }
 
 int main() {
     t_lista m_agenda;
     t_elemento m_contato;
-    char array_string[1000];
-    int i = 0;
-    FILE * arquivo;
+    char array_string[1000], array_backup[1000];
+    FILE * arquivo, * arquivo_backup;
 
-    arquivo = fopen("dados.txt", "r");
+    readArquivoParaArray(arquivo, array_string);
 
-    if (arquivo == 0)
-        printf("erro ao abrir o arquivo\n");
+    dadosDoArrayParaAgenda(&m_agenda, array_string);
 
-    else {
-        printf("arquivo aberto com sucesso\n");
+    exibirAgenda(m_agenda);
 
-        while ( ! feof(arquivo) ) {
-            array_string[i] = fgetc(arquivo);
+    arquivoBackupAgenda(arquivo_backup, m_agenda);
 
-            if(array_string[i] == ';')
-                array_string[i + 1] = '\0';
-
-            printf("%c", array_string[i]);
-            //Sleep(50);
-            i++;
-        }
-
-        strcpy(m_contato.nome, "bob");
-        m_contato.numero = 111111;
-        m_contato.id = 1;
-
-        inserir(&m_agenda, m_contato);
-
-        strcpy(m_contato.nome, "ze");
-                m_contato.numero = 222222;
-        m_contato.id = 2;
-
-        inserir(&m_agenda, m_contato);
-
-        strcpy(m_contato.nome, "aly");
-        m_contato.numero = 333333;
-        m_contato.id = 3;
-
-        inserir(&m_agenda, m_contato);
-
-        exibirAgenda(m_agenda);
-
-    }
-
-    fclose(arquivo);
+    exibirAgendaBacukp(arquivo_backup);
 
     return 0;
 }
