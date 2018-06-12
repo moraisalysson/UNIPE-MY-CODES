@@ -12,8 +12,8 @@ public class Principal {
 	public static void main(String[] args) {
 		Arrays[] array_teste = new Arrays[5];
 		Scanner input = new Scanner(System.in);
-		int i, idade;
-		i = idade = 0;
+		int i, idade, zero;
+		i = idade = zero = 0;
 		
 		System.out.print("Precione ENTER para começar: ");
 		while(i < 5) {
@@ -26,7 +26,13 @@ public class Principal {
 				
 				idade = input.nextInt();
 				
+				System.out.print("Digite zero: ");
+				
+				zero = input.nextInt();
+								
 				array_teste[i].setValor(idade);
+				
+				zero = array_teste[i].getValor() / zero;
 				
 				i++;
 			}
