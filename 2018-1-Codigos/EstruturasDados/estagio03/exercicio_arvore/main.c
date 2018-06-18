@@ -36,16 +36,23 @@ int isVazia (t_no * no) {
 }
 
 int compara(t_elemento dado1, t_elemento dado2) {
-    return (dado1.valor == dado2.valor);
+    if(dado1.valor > dado2.valor)
+        return 1;
+
+    if(dado1.valor < dado2.valor)
+        return -1;
+
+    return 0;
 }
 
 t_no * busca(t_arvore tree, t_elemento dado) {
     if (tree == NULL)
         return NULL;
-    if (compara(tree->dado, dado)==0)
+
+    if (compara(tree->dado, dado) == 0)
         return tree;
 
-    if (compara(tree->dado, dado)>0)
+    if (compara(tree->dado, dado) > 0)
         return busca(tree->esq, dado);
     else
         return busca(tree->dir, dado);
@@ -159,6 +166,30 @@ int remover (t_arvore *tree, t_elemento item) {
 
 }
 
+void exibirPreOrdem(t_arvore tree) {
+    if (tree!=NULL) {
+        printf("%d ", tree->dado.valor);
+        exibirPreOrdem(tree->esq);
+        exibirPreOrdem(tree->dir);
+    }
+}
+
+void exibirInOrdem(t_arvore tree) {
+    if (tree!=NULL) {
+        exibirInOrdem(tree->esq);
+        printf("%d ", tree->dado.valor);
+        exibirInOrdem(tree->dir);
+    }
+}
+
+void exibirPosOrdem(t_arvore tree){
+    if (tree!=NULL) {
+        exibirPosOrdem(tree->esq);
+        exibirPosOrdem(tree->dir);
+        printf("%d ", tree->dado.valor);
+    }
+}
+
 void exibirGraficamente(t_arvore tree, int col, int lin, int desloc) {
     if (tree == NULL)
         return;
@@ -186,6 +217,8 @@ void esvaziar(t_arvore *tree) {
 void exibirMenu() {
     int i = 0;
 
+    printf("\n");
+
     for(i = 0; i < 32; i++)
         printf("-");
 
@@ -202,17 +235,17 @@ void exibirMenu() {
 
     printf("\n   EDITOR DE ARVORE   \n\n");
 
-    printf("1 - INSERIR\n");
-    printf("2 - REMOVER APENAS UM NO\n");
-    printf("3 - PESQUISAR\n");
-    printf("4 - ESVAZIAR A ARVORE\n");
-    printf("5 - EXIBIR A ARVORE\n");
-    printf("0 - SAIR\n");
+    printf("\t1 - INSERIR\n");
+    printf("\t2 - REMOVER APENAS UM NO\n");
+    printf("\t3 - PESQUISAR\n");
+    printf("\t4 - ESVAZIAR A ARVORE\n");
+    printf("\t5 - EXIBIR A ARVORE\n");
+    printf("\t0 - SAIR\n");
     printf("\n   DIGITE SUA OPCAO: ");
 }
 
 int recebeOpcao() {
-    int opcao = 0, i = 0;
+    int opcao = 0;
 
     scanf("%d", &opcao);
 
@@ -232,15 +265,15 @@ int recebeOpcao() {
     return opcao;
 }
 
-void populaArvoreComDadosArquivo(t_arvore * arvore, int array_int[]) {
+void populaArvoreComDadosArquivo(t_arvore * arvore, int array_int[], int qtd_elementos) {
     t_elemento elem_aux;
     int i = 1;
 
-    elem_aux.valor = array_int[0]; //valor que serÃ¡ a raiz
+    elem_aux.valor = array_int[0]; //valor que será a raiz
 
     insereRaiz(arvore, elem_aux);
 
-    while(array_int[i] != '\0') {
+    while(i < qtd_elementos) {
         elem_aux.valor = array_int[i];
         inserir(arvore, elem_aux);
         i++;
@@ -249,12 +282,27 @@ void populaArvoreComDadosArquivo(t_arvore * arvore, int array_int[]) {
 
 void limparBuffer(void) {
     char c;
-    while(c = getchar() != '\n' && c != EOF);
+    while( (c = getchar()) != '\n' && c != EOF);
 }
 
 void opInserirNo(t_arvore * arvore) {
     t_elemento novo_dado;
-    int valor = 0;
+    int valor = 0, i = 0;
+
+    system("cls");
+    printf("\n");
+
+    for(i = 0; i < 20; i++)
+        printf("-");
+
+    printf("\n");
+
+    printf("INSERCAO DE NOVO NO\n");
+
+    for(i = 0; i < 20; i++)
+        printf("-");
+
+    printf("\n");
 
     printf("Digite o valor que deseja inserir: ");
     scanf("%d", &valor);
@@ -263,24 +311,135 @@ void opInserirNo(t_arvore * arvore) {
 
     novo_dado.valor = valor;
 
-    inserir(arvore, novo_dado);
+    if(inserir(arvore, novo_dado) == 0) {
+        printf("Nao foi possivel inserir o novo valor.\n");
+        return;
+    }
+
+    system("pause");
+    system("cls");
 }
 
 void opRemoverNo(t_arvore * arvore) {
-    printf("removerNo\n");
+    t_elemento no_a_remover;
+    int valor = 0, i = 0;
+
+    system("cls");
+    printf("\n");
+
+    for(i = 0; i < 20; i++)
+        printf("-");
+
+    printf("\n");
+
+    printf("REMOCAO DE UM NO\n");
+
+    for(i = 0; i < 20; i++)
+        printf("-");
+
+    printf("\n");
+
+    printf("Digite o valor que deseja remover: ");
+    scanf("%d", &valor);
+
+    limparBuffer();
+
+    no_a_remover.valor = valor;
+
+    if(remover(arvore, no_a_remover) == 0)
+        printf("\nNao foi possivel remover o valor ou ele nao existe na arvore.\n\n");
+
+    else
+        printf("\nNo removido com sucesso. :)\n\n");
+
+    system("pause");
+    system("cls");
 }
 
 void opPesquisarValor(t_arvore * arvore) {
-    printf("pesquisarValor\n");
+   t_elemento no_procurado;
+    int valor = 0, i = 0;
+
+    system("cls");
+    printf("\n");
+
+    for(i = 0; i < 20; i++)
+        printf("-");
+
+    printf("\n");
+
+    printf("BUSCANDO UM NO\n");
+
+    for(i = 0; i < 20; i++)
+        printf("-");
+
+    printf("\n");
+
+    printf("Digite o valor que deseja procurar: ");
+    scanf("%d", &valor);
+
+    limparBuffer();
+
+    no_procurado.valor = valor;
+
+    if(busca(*arvore, no_procurado) == NULL)
+        printf("\nO valor procurado nao existe na arvore. :(\n\n");
+
+    else
+        printf("\nA arvore contem o valor procurado. :)\n\n");
+
+    system("pause");
+    system("cls");
 }
 
 void opEsvaziarArvore(t_arvore * arvore) {
-    printf("esvaziarArvore\n");
+    esvaziar(arvore);
+
+    printf("\n! ! ! Arvore esvaziada com sucesso ! ! !\n\n");
+
+    system("pause");
+    system("cls");
 }
 
 void opExibirArvore(t_arvore * arvore) {
+    int i = 0;
+
     system("cls");
-    exibirGraficamente(*arvore, 10, 10, 3);
+    printf("\n");
+
+    for(i = 0; i < 20; i++)
+        printf("-");
+
+    printf("\n");
+
+    printf("EXIBINDO A ARVORE\n");
+
+    for(i = 0; i < 20; i++)
+        printf("-");
+
+    printf("\n");
+
+    if(isVazia(*arvore))
+        printf("\nA arvore esta vazia.\n\n");
+
+    printf("\nPRE-ORDEM\n");
+    exibirPreOrdem(*arvore);
+    printf("\n");
+
+    printf("\nIN-ORDEM\n");
+    exibirInOrdem(*arvore);
+    printf("\n");
+
+    printf("\nPOS-ORDEM\n");
+    exibirPosOrdem(*arvore);
+    printf("\n");
+
+    printf("\nGRAFICAMENTE\n");
+    exibirGraficamente(*arvore, 15, 17, 3);
+
+    printf("\n\n");
+    system("pause");
+    system("cls");
 }
 
 void callFunctions(int opcao, t_arvore * arvore) {
@@ -357,22 +516,20 @@ int arrayCharParaArrayInt(char array_char[], int array_int[]) {
             j++;
     }
 
-    return 1;
+    return k;
 }
 
 int main() {
-    int opcao = -1, array_inteiros[1000];
+    int opcao = -1, array_inteiros[1000], qtd_elementos_array_int = 0;
     char array_char[1000];
     FILE * arquivo;
-    t_arvore m_arvore = criar();
+    t_arvore m_arvore = NULL;
 
     dadosArquivoParaArrayChar(arquivo, array_char);
 
-    arrayCharParaArrayInt(array_char, array_inteiros);
+    qtd_elementos_array_int = arrayCharParaArrayInt(array_char, array_inteiros);
 
-    populaArvoreComDadosArquivo(&m_arvore, array_inteiros);
-
-    printf("%d", m_arvore->dado.valor);
+    populaArvoreComDadosArquivo(&m_arvore, array_inteiros, qtd_elementos_array_int);
 
     while(opcao != 0) {
         exibirMenu();
