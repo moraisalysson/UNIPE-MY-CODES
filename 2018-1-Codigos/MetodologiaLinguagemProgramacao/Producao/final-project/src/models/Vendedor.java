@@ -1,37 +1,47 @@
 package models;
 
 public class Vendedor implements Cadastro {
+	private static int contador_id; //estático para valor poder ser usado em vários objetos
 	private String nome;
 	private int codigo;
 	private double comissao; //em percentagem e deve ser única para todos os objetos
 	private String endereco;
 	
-	public Vendedor() {
+	public Vendedor() { //inicializando o valor da comissão
 		this.comissao = 0.15d; //15% de comissão para todos os vendedores
 	}
-		
-	public int cadastrarDados(int contador_vendedor) {
-		String nome_temp = "", endereco_temp = "";
-		int codigo = 0;
-		
-		System.out.println("---- CADASTRO DE VENDEDOR ----");
+	
+	public void cadastraNome() {
+		String nome_temp = "";
 		
 		System.out.print("Vendedor: ");
 		nome_temp = input.nextLine();
 		
+		this.setNome(nome_temp);
+	}
+	
+	public void cadastraEndereco() {
+		String endereco_temp = "";
+		
 		System.out.print("Endereço: ");
 		endereco_temp = input.nextLine();
-		
-		codigo = contador_vendedor + 1;
-		
-		this.setNome(nome_temp);
+
 		this.setEndereco(endereco_temp);
-		this.setCodigo(codigo);
+	}
+		
+	public void cadastrarDados() {		
+		System.out.printf("\n---- CADASTRO DE VENDEDOR ----\n\n");
+
+		this.cadastraNome();
+		this.cadastraEndereco();
+
+		contador_id = contador_id + 1;
+
+		this.setCodigo(contador_id);
 		
 		System.out.print("Vendedor cadastrado com sucesso! ");
-		System.out.print("Codigo: " + this.getCodigo() );
+		System.out.println("Codigo: " + this.getCodigo());
 		
-		return codigo;
 	}
 
 	public String getNome() {
