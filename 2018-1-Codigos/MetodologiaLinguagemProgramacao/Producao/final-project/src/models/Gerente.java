@@ -1,13 +1,23 @@
 package models;
 
-public class Vendedor extends Funcionario {
+/**
+ * Esta classe representa os gerentes, do tipo Funcionario
+ * @author Grupo de Java - P3 - CC
+ */
+public class Gerente extends Funcionario {
 	private static int contador_id; //estático para valor poder ser usado em vários objetos
 	
+	/**
+	 * Comissão de venda atribuída ao gerente, em percentagem e deve ser única para todos os objetos
+	 */
 	
-	public Vendedor() { //inicializando o valor da comissão
-		this.comissao = 0.15d; //15% de comissão para todos os vendedores
+	/**
+	 * Construtor da classe Gerente: 20% de comissão
+	 */
+	public Gerente() {
+		this.comissao = 0.20d;
 	}
-		
+
 	public void cadastraNome() {
 		String nome_temp = "";
 		
@@ -27,7 +37,7 @@ public class Vendedor extends Funcionario {
 	}
 		
 	public void cadastrarDados() {		
-		System.out.printf("\n---- CADASTRO DE VENDEDOR ----\n");
+		System.out.printf("\n---- CADASTRO DE GERENTE ----\n");
 
 		this.cadastraNome();
 		this.cadastraEndereco();
@@ -35,17 +45,17 @@ public class Vendedor extends Funcionario {
 		Vendedor.setContador_id(++contador_id);
 
 		this.setCodigo(contador_id);
-	
+		
 		System.out.println("Codigo: " + this.getCodigo());
 		
 	}
-
+	
 	public static int getContador_id() {
 		return contador_id;
 	}
 
 	public static void setContador_id(int contador_id) {
-		Vendedor.contador_id = contador_id;
+		Gerente.contador_id = contador_id;
 	}
 
 }

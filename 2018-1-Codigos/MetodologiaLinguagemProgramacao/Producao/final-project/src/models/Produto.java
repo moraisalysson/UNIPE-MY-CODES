@@ -3,7 +3,7 @@ package models;
 import java.util.InputMismatchException;
 
 public class Produto implements Cadastro {
-	private static int contador_id; //estático para valor poder ser usado em vários objetos
+	private static int contador_id; //estático para que o valor possa ser usado em vários objetos
 	private int codigo;
 	private String descricao;
 	private double valorVenda;
@@ -39,6 +39,9 @@ public class Produto implements Cadastro {
 			
 			} catch (InputMismatchException ex) {
 				System.out.printf("    -> Digite apenas valores em reais.\n");
+			
+			} catch (Exception ex) {
+				System.out.println("Houve um erro inesperado. Entre emm contato com o suporte.");
 			}
 			
 		}
@@ -66,6 +69,9 @@ public class Produto implements Cadastro {
 				
 			} catch (InputMismatchException ex) {
 				System.out.printf("    -> Digite apenas valores em reais.\n");
+
+			} catch (Exception ex) {
+				System.out.println("Houve um erro inesperado. Entre emm contato com o suporte.");
 			}
 		}
 		
@@ -78,42 +84,54 @@ public class Produto implements Cadastro {
 		boolean continue_loop = true;
 		
 		while(continue_loop) {
-			System.out.print("Em promoção (sim ou não): ");
-			promocao_verificador = input.nextLine();
+			try {
+				System.out.print("Em promoção (sim ou não): ");
+				promocao_verificador = input.nextLine();
+				
+				if(promocao_verificador.equalsIgnoreCase("sim")) {
+					emPromocao = true;
+					continue_loop = false;
+				}
+				
+				else if(promocao_verificador.equalsIgnoreCase("não")) {
+					emPromocao = false;
+					continue_loop = false;
+				}
+				
+				else
+					System.out.println("Digite apenas 'sim' ou 'não'.");
 			
-			if(promocao_verificador.equalsIgnoreCase("sim")) {
-				emPromocao = true;
-				continue_loop = false;
+			} catch (Exception ex) {
+				System.out.println("Houve um erro inesperado. Entre emm contato com o suporte.");
 			}
-			
-			else if(promocao_verificador.equalsIgnoreCase("não")) {
-				emPromocao = false;
-				continue_loop = false;
-			}
-			
-			else
-				System.out.println("Digite apenas 'sim' ou 'não'.");
 		}
 		
 		this.setPromocao(emPromocao);
 	}
 	
 	public void cadastrarDados() {
-		System.out.println("\n---- CADASTRO DE PRODUTO ----\n\n");
+		System.out.println("\n---- CADASTRO DE PRODUTO ----");
 
 		this.cadastraDescricao();
 		this.cadastraValorVenda();
 		this.cadastraValorCusto();
 		this.cadastraEmPromoca();
 
-		contador_id++;
+		Produto.setContador_id(++contador_id);
 
 		this.setCodigo(contador_id);
 
-		System.out.print("Produto cadastrado com sucesso! ");
 		System.out.println("Codigo: " + this.getCodigo() );
 	}
 
+	public static int getContador_id() {
+		return contador_id;
+	}
+
+	public static void setContador_id(int contador_id) {
+		Produto.contador_id = contador_id;
+	}
+	
 	public int getCodigo() {
 		return codigo;
 	}
