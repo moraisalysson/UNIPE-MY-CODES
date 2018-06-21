@@ -11,7 +11,7 @@ public class Venda implements Cadastro {
 	private int quantidadeItens;
 	private double valor;
 	
-	public void registrarVendedor(Vendedor vendedores[]) {
+	private void registrarVendedor(Vendedor vendedores[]) {
 		boolean continue_loop = true;
 		int cod_vendedor = 0;
 		
@@ -42,7 +42,7 @@ public class Venda implements Cadastro {
 		this.setVendedor(vendedores[cod_vendedor  - 1]);
 	}
 
-	public void registrarProduto(Produto produtos[]) {
+	private void registrarProduto(Produto produtos[]) {
 		boolean continue_loop = true;
 		int cod_produto = 0;
 		
@@ -71,7 +71,7 @@ public class Venda implements Cadastro {
 		this.setProduto(produtos[cod_produto - 1]);
 	}
 	
-	public void registrarPercentualDesconto() {
+	private void registrarPercentualDesconto() {
 		boolean continue_loop = true;
 		double percentual_desconto = 0.0d;
 		
@@ -101,7 +101,7 @@ public class Venda implements Cadastro {
 		this.setDesconto(percentual_desconto);
 	}
 	
-	public void registrarQtdProdutos() {
+	private void registrarQtdProdutos() {
 		boolean continue_loop = true;
 		int qtd_produtos = 0;
 		
@@ -138,13 +138,6 @@ public class Venda implements Cadastro {
 	}
 	
 	public void cadastrarDados(Vendedor vendedores[], Produto produtos[]) {
-		System.out.println("\n---- CADASTRO DE VENDA ----");
-		
-		if(Vendedor.getContador_id() == 0 || Produto.getContador_id() == 0) {
-			System.out.println("Não será possível registrar a venda, pois não há vendedores ou produtos cadastrados.");
-			return ;
-		}
-			
 		this.registrarVendedor(vendedores);
 		this.registrarProduto(produtos);
 		this.registrarQtdProdutos();
@@ -155,8 +148,6 @@ public class Venda implements Cadastro {
 		Venda.setContadorVendas(++contadorVendas);
 
 		this.setCodigo(contadorVendas);
-		
-		this.relatorioVenda();
 		
 	}
 	
@@ -225,8 +216,7 @@ public class Venda implements Cadastro {
 		return vendedor.getComissao() * this.calcularValor();
 	}
 	
-	public void relatorioVenda() {
-		System.out.println("---------- RESUMO DA VENDA ----------");
+	public void relatorioVenda() throws Exception {
 		System.out.printf(">> Código da venda: %d%n", this.getCodigo());
 		System.out.printf(">> Código vendedor: %s%n", vendedor.getCodigo());
 		System.out.printf(">> Nome vendedor: %s%n", vendedor.getNome());

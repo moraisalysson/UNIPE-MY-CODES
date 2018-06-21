@@ -37,8 +37,6 @@ public class Gerente extends Funcionario {
 	}
 		
 	public void cadastrarDados() {		
-		System.out.printf("\n---- CADASTRO DE GERENTE ----\n");
-
 		this.cadastraNome();
 		this.cadastraEndereco();
 

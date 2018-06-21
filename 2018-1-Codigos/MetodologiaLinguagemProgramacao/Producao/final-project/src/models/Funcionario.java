@@ -8,7 +8,7 @@ public abstract class Funcionario implements Cadastro {
 	protected int codigo;
 	protected double comissao;
 	
-	public void exibirDados() {
+	public void exibirDados() throws Exception {
 		System.out.println("Código: " + this.getCodigo());
 		System.out.println("Nome: " + this.getNome());
 		System.out.println("Endereço: " + this.getEndereco());

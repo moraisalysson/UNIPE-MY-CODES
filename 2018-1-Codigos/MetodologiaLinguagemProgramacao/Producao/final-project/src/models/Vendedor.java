@@ -27,8 +27,6 @@ public class Vendedor extends Funcionario {
 	}
 		
 	public void cadastrarDados() {		
-		System.out.printf("\n---- CADASTRO DE VENDEDOR ----\n");
-
 		this.cadastraNome();
 		this.cadastraEndereco();
 

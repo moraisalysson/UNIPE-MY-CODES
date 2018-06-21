@@ -10,6 +10,14 @@ public class Produto implements Cadastro {
 	private double valorCusto;
 	private boolean promocao;
 	
+	public void exibirDados() throws Exception {
+		System.out.println("Código: " + this.getCodigo());
+		System.out.println("Descrição: " + this.getDescricao());
+		System.out.println("Valor de custo: R$ " + this.getValorCusto());
+		System.out.println("Valor de venda: R$ " + this.getValorVenda());
+		System.out.println("Em promoção: R$ " + this.isPromocao());
+	}
+	
 	public void cadastraDescricao( ) {
 		String descricao_temp = "";
 		

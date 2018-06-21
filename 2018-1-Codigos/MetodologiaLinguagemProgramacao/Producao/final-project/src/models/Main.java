@@ -9,9 +9,9 @@ public class Main {
 		Vendedor[] array_vendedores = new Vendedor[300];
 		Gerente[] array_gerentes = new Gerente[50];
 		Venda[] array_vendas = new Venda[10000];
-		Menu main_menu = new Menu();
+		MenuPrincipal main_menu = new MenuPrincipal();
 		
-		main_menu.menuInicial(array_vendedores, array_gerentes, array_produtos, array_vendas);
+		main_menu.exibirMenu(array_vendedores, array_gerentes, array_produtos, array_vendas);
 
 	}
 
