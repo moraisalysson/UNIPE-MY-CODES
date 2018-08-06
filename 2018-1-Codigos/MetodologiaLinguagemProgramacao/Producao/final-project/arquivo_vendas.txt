@@ -1,1 +1,0 @@
-1,models.Produto@13969fbe,models.Vendedor@6aaa5eb0,10,0.1,0.0;
