@@ -1,0 +1,4 @@
+INDEX VERSION 1.130+C:\Users\Almox3\Desktop\UNIPE\UNIPE-Codigos\2018-1-Codigos\MetodologiaLinguagemProgramacao\.metadata\.plugins\org.eclipse.jdt.core
+299077578.index
+3537143607.index
+2296045168.index
