@@ -63,8 +63,9 @@ int compara(t_elemento dado1, t_elemento dado2) {
 
 int getPosicao(t_lista lista, t_elemento dado) {
     int n = 0;
+    
     while (lista != NULL) {
-        if (compara(lista->dado, dado)>=0)
+        if (compara(lista->dado, dado) >= 0)
             return n;
         lista = lista->prox;
         n++;
