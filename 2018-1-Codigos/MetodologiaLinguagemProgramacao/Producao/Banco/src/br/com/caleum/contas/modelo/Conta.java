@@ -1,5 +1,12 @@
 package br.com.caleum.contas.modelo;
 
+/**
+ * Classe responsável por moldar as Contas do Banco
+ * 
+ * @author ALYSSON
+ *
+ */
+
 public class Conta {
 
 	private double saldo;
@@ -7,6 +14,12 @@ public class Conta {
 	private int numero;
 	private String agencia;
 
+	/**
+	 * Método que incrementa o saldo.
+	 * @param valor
+	 */
+	
+	
 	public void deposita(double valor) {
 		this.saldo += valor;
 	}
