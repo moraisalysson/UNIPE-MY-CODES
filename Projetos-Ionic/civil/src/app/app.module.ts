@@ -1,4 +1,3 @@
-import { ChamadosPage } from './../pages/chamados/chamados';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -7,12 +6,17 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { EmpreendimentosPage } from '../pages/empreendimentos/empreendimentos';
+import { ProblemasPage } from './../pages/problemas/problemas';
+import { ChamadosPage } from './../pages/chamados/chamados';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ChamadosPage
+    ChamadosPage,
+    ProblemasPage,
+    EmpreendimentosPage
   ],
   imports: [
     BrowserModule,
@@ -22,7 +26,9 @@ import { HomePage } from '../pages/home/home';
   entryComponents: [
     MyApp,
     HomePage,
-    ChamadosPage
+    ChamadosPage,
+    ProblemasPage,
+    EmpreendimentosPage
   ],
   providers: [
     StatusBar,
