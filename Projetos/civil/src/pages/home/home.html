@@ -1,0 +1,28 @@
+<ion-content>
+  
+  <div class="main-container">
+    <div class="main-container-interna">
+      <img class="build-logo" src="../assets/imgs/build.png" />
+
+      <h6 style="text-align: center;">Sistema de Gerenciamento de Ocorrências</h6>
+      
+      <ion-list>
+        <ion-item class="labels-box">
+          <ion-label floating>Usuário</ion-label>
+          <ion-input type="text" value="" #usuario></ion-input>
+        </ion-item>
+      
+        <ion-item class="labels-box"> 
+          <ion-label floating>Senha</ion-label>
+          <ion-input type="password" #senha></ion-input>
+        </ion-item>
+      
+      </ion-list>
+
+      <button ion-button block (click)="entrar()" class="btn_login">Login</button>
+
+      <p class="copyright">© 2018</p>
+    </div>
+  </div>
+  
+</ion-content>

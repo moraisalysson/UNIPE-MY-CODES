@@ -1,0 +1,36 @@
+page-home {
+
+    .main-container {
+        text-align: center;
+        width: 100vw; //centralizar
+        height: 100vh; //centralizar
+        display: flex; //centralizar
+        flex-direction: row; //centralizar
+        justify-content: center; //centralizar
+        align-items: center; //centralizar
+    }
+    
+    .build-logo {
+        padding-bottom: 10px;
+        max-width: 80px;
+    }
+
+    .item-ios {
+        color: gray;
+        .text-input {
+            color: black;
+        }
+    }
+
+    .list-ios > .item-block:first-child { //remove linha no IOS
+        border-top: none;
+    }
+
+    .labels-box {
+    }
+    
+    .copyright {
+        padding-top: 30px; 
+        color: lightslategrey;
+    }    
+}
