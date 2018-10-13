@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the ProblemasPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { ChamadosPage } from './../chamados/chamados';
+import { EmpreendimentosPage } from '../empreendimentos/empreendimentos';
 
 @IonicPage()
 @Component({
@@ -15,11 +11,23 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ProblemasPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  lista_categorias: Array<any>;
+
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams) {
+    this.lista_categorias = [
+                            {nome: 'Hidráulico', data: '16/10/2018'},
+                            {nome: 'Elétrico', data: '20/10/2018'}
+                          ];
+   
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProblemasPage');
+  chamadoPage() {
+    this.navCtrl.push(ChamadosPage);
+  }
+
+  empreendPage() {
+    this.navCtrl.push(EmpreendimentosPage);
   }
 
 }

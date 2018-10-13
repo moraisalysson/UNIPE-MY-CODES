@@ -1,18 +1,75 @@
-<!--
-  Generated template for the ProblemasPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>problemas</ion-title>
+    <ion-title>
+      <ion-icon ios="ios-menu" md="md-menu" menuToggle item-start></ion-icon>
+      Categorias dos Problemas
+    </ion-title>
   </ion-navbar>
 
 </ion-header>
 
+<ion-menu [content]="mycontent">
+    <ion-content>
+      <ion-list>
+          <ion-card>
+
+            <ion-list>
+                <button ion-item>
+                  <ion-icon ios="ios-alert" md="md-alert" item-start></ion-icon>
+                  <b>Problemas</b>
+                </button>
+
+                <button ion-item class="item-problema">
+                  <ion-icon ios="ios-arrow-forward" md="md-arrow-forward" item-start></ion-icon>
+                  Cadastrar nova categoria
+                </button>
+
+                <button ion-item class="item-problema">
+                  <ion-icon ios="ios-arrow-forward" md="md-arrow-forward" item-start></ion-icon>
+                  Gerenciar subcategorias
+                </button>
+
+                <button ion-item class="item-problema">
+                  <ion-icon ios="ios-arrow-forward" md="md-arrow-forward" item-start></ion-icon>
+                  Gerenciar problemas
+                </button>
+      
+              <button ion-item (click)="chamadoPage()">
+                <ion-icon ios="ios-chatbubbles" md="md-chatbubbles" item-start></ion-icon>
+                <b>Chamados</b>
+              </button>
+          
+              <button ion-item (click)="empreendPage()">
+                <ion-icon ios="ios-home" md="md-home" item-start></ion-icon>
+                <b>Empreendimentos</b>
+              </button>
+          
+              <div class="div-close-icon">
+                <ion-icon menuClose ios="ios-return-left" md="md-return-left" class="menu-close-icon">
+                </ion-icon>
+            </div>
+
+            </ion-list> 
+          </ion-card>
+      </ion-list>
+    </ion-content>
+</ion-menu>
+  
+<ion-nav #mycontent [root]="rootPage"></ion-nav>
 
 <ion-content padding>
 
-</ion-content>
+  <ion-card *ngFor="let element of lista_categorias">
+    
+    <ion-card-header>
+      <a>{{ element.nome }}</a>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <p>Data de cadastro: {{ element.data }}</p>
+    </ion-card-content>
+  
+  </ion-card>
+
+</ion-content>/

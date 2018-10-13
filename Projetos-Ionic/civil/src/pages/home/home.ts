@@ -1,4 +1,4 @@
-import { ChamadosPage } from './../chamados/chamados';
+import { ProblemasPage } from './../problemas/problemas';
 import { Component, ViewChild } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
 
@@ -20,7 +20,7 @@ export class HomePage {
 
     if(this.usuario.value == "admin" && this.senha.value == "admin123@") {
       
-      this.navCtrl.push(ChamadosPage);
+      this.navCtrl.setRoot(ProblemasPage);
     
     } else {
     
