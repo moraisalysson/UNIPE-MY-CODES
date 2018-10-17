@@ -1,3 +1,5 @@
+import { HttpModule } from '@angular/http';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -10,6 +12,9 @@ import { EmpreendimentosPage } from '../pages/empreendimentos/empreendimentos';
 import { ProblemasPage } from './../pages/problemas/problemas';
 import { ChamadosPage } from './../pages/chamados/chamados';
 
+import { ServicesApiProvider } from '../providers/services-api/services-api';
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -20,7 +25,8 @@ import { ChamadosPage } from './../pages/chamados/chamados';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -33,7 +39,8 @@ import { ChamadosPage } from './../pages/chamados/chamados';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ServicesApiProvider
   ]
 })
 export class AppModule {}
