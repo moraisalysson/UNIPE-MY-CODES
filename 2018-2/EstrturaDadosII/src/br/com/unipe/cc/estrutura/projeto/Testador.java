@@ -10,6 +10,13 @@ import br.com.unipe.cc.estrutura.projeto.persistencia.GerarCSV;
 
 import java.util.TreeMap;
 
+/*
+ * Equipe:
+		Aysson Silva de Morais
+		José Everaldo Gomes
+		Yasmin Haiany
+ */
+
 public class Testador {
 	public static void main(String[] args) throws IOException {
 		
@@ -73,7 +80,7 @@ public class Testador {
 			
 		}
 		
-		System.out.printf("100%\n\n");
+		System.out.print("100%\n\n");
 		file.fechar();
 	}
 }

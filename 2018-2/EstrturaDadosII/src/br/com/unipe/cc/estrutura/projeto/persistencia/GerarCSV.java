@@ -50,7 +50,7 @@ public class GerarCSV {
 		this.writer.append("\nEquipe:;\n"
 				+ "Aysson Silva de Morais;\n"
 				+ "José Everaldo Gomes;\n"
-				+ "Israel Oriente Nunes;");
+				+ "Yasmin Haiany;");
 		
 		System.out.println("Arquivo gerado com sucesso."); 
 		
