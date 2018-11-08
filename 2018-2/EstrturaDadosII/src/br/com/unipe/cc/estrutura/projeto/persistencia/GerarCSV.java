@@ -47,6 +47,7 @@ public class GerarCSV {
 	}
 	
 	public void fechar() throws IOException {
+		
 		this.writer.append("\nEquipe:;\n"
 				+ "Aysson Silva de Morais;\n"
 				+ "José Everaldo Gomes;\n"

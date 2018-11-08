@@ -3,7 +3,7 @@ package br.com.livro.cap18generics;
 
 //fig 18.3, pág 649
 
-public class OverloadedMethods {
+public class OverloadedMethods183 {
 	
 	public static <E> void printArray( E[] inputArray ) {
 		
