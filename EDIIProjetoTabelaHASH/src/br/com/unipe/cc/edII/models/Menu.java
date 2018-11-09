@@ -31,8 +31,12 @@ public class Menu {
 			
 			opcao = this.getOpcaoDoUser();
 			
-			if(opcao == 0)
+			if(opcao == 0) {
+				
+				System.out.println( "\n>>> Sistema encerrado <<<" );
+				
 				break;
+			}
 			
 			this.chamadorFuncoes(opcao);
 			
@@ -43,19 +47,19 @@ public class Menu {
 	private int getOpcaoDoUser() {
 		
 		int opcao = 0;
-		boolean terminate = false; 
+		boolean continuar = true; 
 		
-		while( ! terminate ) {
+		while( continuar ) {
 		
 			try {
 				
 				opcao = Integer.parseInt( this.input.nextLine() );
-				terminate = true;
+				continuar = false;
 				
 			} catch(Exception e) {
 				
 				e.printStackTrace();
-				System.out.println("Houve um problema, tente novamente.");
+				System.out.println( ">>> Houve um problema, tente novamente <<<" );
 			
 			}
 		
@@ -73,14 +77,17 @@ public class Menu {
 				break;
 				
 			case 2:
-				System.out.println(2);
+				
+				System.out.println("buscar em construção");
 				break;
 				
 			case 3:
-				System.out.println(3);
+				
+				this.manipulador.removerAluno();
 				break;
 				
 			case 4:
+				
 				this.manipulador.exibirTabela();
 				break;
 								

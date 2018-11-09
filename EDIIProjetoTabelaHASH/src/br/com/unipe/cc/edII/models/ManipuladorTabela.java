@@ -4,14 +4,14 @@ import java.util.Scanner;
 
 public class ManipuladorTabela {
 	
-	TabelaHash <Aluno> tabela;
+	TabelaHash tabela;
 	Scanner input;
 		
 	public ManipuladorTabela() {
 		
-		this.tabela = new TabelaHash <>();
+		this.tabela = new TabelaHash();
 		this.input =  new Scanner(System.in);
-	
+		
 	}
 	
 	public void inserirAluno() {
@@ -30,9 +30,18 @@ public class ManipuladorTabela {
 		aluno.setIdade( Integer.parseInt( input.nextLine() ) );
 		
 		this.tabela.addAluno(aluno);
-		
-		System.out.println("Aluno inserido com sucesso!\n");
 	
+	}
+	
+	public void removerAluno() {
+			
+		System.out.println("\n--- Remover Aluno ---");
+		
+		System.out.print("Matrícula: ");
+		int matricula = Integer.parseInt( input.nextLine() );
+		
+		this.tabela.removerAluno( matricula );
+		
 	}
 	
 	public void exibirTabela() {
