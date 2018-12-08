@@ -15,7 +15,7 @@ public class Menu {
 	}
 	
 	public void exibirMenu() {
-		int opcao = 0;
+		int opcao = -1;
 		
 		do {
 			
@@ -36,36 +36,43 @@ public class Menu {
 				System.out.println( "\n>>> Sistema encerrado <<<" );
 				
 				break;
-			}
 			
+			} 
+					
 			this.chamadorFuncoes(opcao);
 			
 		} while( true );
+		
+		
 	
 	}
 	
 	private int getOpcaoDoUser() {
 		
-		int opcao = 0;
-		boolean continuar = true; 
-		
-		while( continuar ) {
-		
-			try {
+		int opcao = -1;
+		//boolean continuar = true; 
 				
-				opcao = Integer.parseInt( this.input.nextLine() );
-				continuar = false;
-				
-			} catch(Exception e) {
-				
-				e.printStackTrace();
-				System.out.println( ">>> Houve um problema, tente novamente <<<" );
+		try {
 			
-			}
+			opcao = Integer.parseInt( this.input.nextLine() );
+			
+			if(opcao < 0 || opcao > 4)	
+				System.out.println( "\n>>> Opção inválida, tente novamente.\n" );
+				
+		//	continuar = false;
+			
+		} catch( NumberFormatException e) {
+			
+			System.out.println( "\n>>> Digite apenas valores inteiros <<<\n" );
+			
+		} catch( Exception e ) {
+
+			System.out.println( "\n>>> Houve um problema desconhecido, tente novamente <<<\n" );
 		
 		}
-		
+				
 		return opcao;
+	
 	}
 
 	private void chamadorFuncoes(int opcao) {
@@ -78,7 +85,7 @@ public class Menu {
 				
 			case 2:
 				
-				System.out.println("buscar em construção");
+				this.manipulador.buscarAluno();
 				break;
 				
 			case 3:

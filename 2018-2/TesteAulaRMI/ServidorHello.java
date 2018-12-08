@@ -1,5 +1,3 @@
-package br.com.unipe.metodologia.cc.aula2910;
-
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;

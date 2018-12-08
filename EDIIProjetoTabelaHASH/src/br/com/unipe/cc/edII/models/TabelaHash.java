@@ -1,7 +1,8 @@
 package br.com.unipe.cc.edII.models;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.TreeMap;
 
 public class TabelaHash {
 	
@@ -12,7 +13,7 @@ public class TabelaHash {
 		this.tabela = new List[11];
 		
 		for(int i = 0; i < 11; i++)
-			this.tabela[i] = new ArrayList<>();
+			this.tabela[i] = new LinkedList<>();
 		
 	}
 	
@@ -52,7 +53,7 @@ public class TabelaHash {
 	public boolean addAluno(Aluno aluno) {
 				
 		if( ! this.verificarExistencia(aluno) ) {
-		
+					
 			int indexAdd = aluno.getMatricula() % 11;
 				
 			this.tabela[indexAdd].add( aluno );
@@ -95,7 +96,26 @@ public class TabelaHash {
 		}
 	}
 	
-	public void buscarAluno() {
+	public TreeMap<Integer, Aluno> buscarAluno(int matricula) {
+		
+		TreeMap <Integer, Aluno> dados = new TreeMap<>();
+		
+		for(int i = 0; i < this.tabela.length; i++ ) {
+			
+			List<Aluno> listaDeAlunos = this.tabela[i];
+			
+			for(int j = 0; j < listaDeAlunos.size(); j++)
+				
+				if( listaDeAlunos.get( j ).getMatricula() == matricula ) {
+					
+					dados.put(j, listaDeAlunos.get( j ) );
+					
+					return dados;
+				
+				}
+		}
+		
+		return null;
 		
 	}
 	
@@ -111,34 +131,41 @@ public class TabelaHash {
 	}
 	
 	public void exibirTabela() {
-				
-		if( this.isEmpty() )
-			System.out.println( "\n>>> Tabela vazia <<<\n");
 		
-		else {
-			for(int i = 0; i < this.tabela.length; i++) {
-				
-				List<Aluno> listaDeAlunos = this.tabela[i];
-				
-				if( listaDeAlunos.size() != 0 ) {
-					
-					System.out.println("\n---------------------");
-					System.out.println( "Índice: " + i);
-					
-					for(int j = 0; j < listaDeAlunos.size(); j++) {
-						
-						System.out.printf( "\n Nome: %s", listaDeAlunos.get( j ).getNome() );
-						System.out.printf( "\n Matrícula: %d", listaDeAlunos.get( j ).getMatricula() );
-						System.out.printf( "\n Idade: %d\n", listaDeAlunos.get( j ).getIdade() );
-					
-					}
+		try {
 			
+			if( this.isEmpty() )
+				System.out.println( "\n>>> Tabela vazia <<<\n");
+			
+			else {
+				for(int i = 0; i < this.tabela.length; i++) {
+					
+					List<Aluno> listaDeAlunos = this.tabela[i];
+					
+					if( listaDeAlunos.size() != 0 ) {
+						
+						System.out.println("\n---------------------");
+						System.out.println( "Índice: " + i);
+						
+						for(int j = 0; j < listaDeAlunos.size(); j++) {
+							
+							System.out.printf( "\n Nome: %s", listaDeAlunos.get( j ).getNome() );
+							System.out.printf( "\n Matrícula: %d", listaDeAlunos.get( j ).getMatricula() );
+							System.out.printf( "\n Idade: %d\n", listaDeAlunos.get( j ).getIdade() );
+						
+						}
+					}	
 				}
 				
+				System.out.println();
 			}
-			
-			System.out.println();
+		} 
 		
+		catch( Exception e ) {
+			System.out.println( ">>> Houve um erro. Tente novamente <<<");	
 		}
-	}
-}
+	} 
+
+} //classe
+
+
