@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+int main() {
+
+	printf(media(9.5, 5.5));
+	
+	return 1;
+}
+
+
+float media (float valorA, float valorB) {
+	
+	media = (valorA + valorB) / 2;
+	
+	return media;
+}

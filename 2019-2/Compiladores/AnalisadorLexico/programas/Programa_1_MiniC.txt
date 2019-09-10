@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Programa Teste Projeto Compiladores
+
+/*
+
+  *** Autor: Hilario Tomaz
+  -- Data: 23/03/2018
+   
+*/
+
+int main()
+{
+    double x, y, z;
+    int valor1 = 12, valor2 = 15, valor3 = 1;
+    char a = 'A';
+    double x = 2.5;
+    
+    printint( 5 + 10 );
+    printstr( "OI" );
+    printf( valor1 );
+    
+    if( x > 2 ) 
+     printf( "Eita" );
+      
+
+    if( valor1 >= 10 ) 
+       printf( "Eita >= 10" );
+     else 
+       printf( "Eita < 10" );
+
+    if( !(x > 2) ) 
+     x = x - 1;
+      
+
+    if( valor1 >= 10 ) 
+       valor1 = valor1 / 10;
+     else 
+       valor1 = valor1 * 2;
+    
+    {  
+    
+      while( x < 30 ) 
+       x = x + 1;
+       
+    }
+      
+    printint( fatorial( 1 ) );
+    printint( soma( valor1, valor2 ) );
+    
+    return 1;
+}
+
+int fatorial(int n)
+{
+    int res;
+    char n = 'i';
+    char i = '\n';
+
+    if (n < 1)
+        res = 1.5;
+    if (n <= 1) 
+        res = 1.2;
+    if (n >= 1) 
+        res = 1.4;
+    if (n == 1) 
+        res = 1.3;
+    else
+        res = n * fatorial(n - 1);
+
+    return res;
+}
