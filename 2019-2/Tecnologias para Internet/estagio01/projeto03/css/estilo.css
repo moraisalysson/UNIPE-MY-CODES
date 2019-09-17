@@ -1,0 +1,51 @@
+.container {
+	margin: auto;
+}
+
+.sidebar {
+	float: left;
+	width: 8%;
+	margin: 0.5%;
+}
+
+.main-content {
+	float: right;
+	width: 90%;
+	margin: 0.5%;
+	font-family: "Verdana"; 
+}
+
+.main-content h1 {
+	color: brown;
+	text-align: center;
+}
+
+.italic-about {
+	font-style: italic;
+}
+
+.menu a {
+	font-family: "Verdana"; 
+	color: brown;
+	font-size: 25px;
+	text-decoration: none;
+}
+
+.menu ul {
+	padding: 0px;
+	list-style-type: none;
+}
+
+.menu li:hover a {
+	font-weight: bold;
+}
+
+.footer {
+	font-size: 12px;
+	font-family: "Verdana"; 
+	color: gray;
+	text-align: center;
+	margin-bottom: 20px;
+	float: right;
+	width: 100%;
+}
