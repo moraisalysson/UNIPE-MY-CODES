@@ -1,0 +1,18 @@
+<html>
+	<body>
+		<script>
+			function checaBomGosto() {
+				var t = document.getElementById("drink").value;
+
+				if(t == 'café') {
+					alert("Parabéns! Você tem bom gosto.");
+				}
+				else {
+					alert("Ok. Nem todo mundo é perfeito.");
+				}
+				
+			}
+		</script>
+		Drink: <input type="text" id="drink" onchange="checaBomGosto()"/>
+	</body>
+</html>

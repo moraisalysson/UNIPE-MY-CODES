@@ -1,0 +1,14 @@
+<html>
+	<body>
+		<script>
+			function alteraImagem() {
+				var imagem = document.getElementById("imagem");
+				if(imagem.src.match("figura2"))
+					imagem.src = "figura.jpg"
+				else
+					imagem.src = "figura2.jpg"
+			}
+		</script>
+		<img id="imagem" src="figura.jpg" onclick="alteraImagem()">
+	</body>
+</html>
